@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "902209161090",
+    "project_id": "psique-1650648966692",
+    "storage_bucket": "psique-1650648966692.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902209161090:android:df38307c01970b0fa1b19b",
+        "android_client_info": {
+          "package_name": "com.example.psique"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902209161090-a09e9drj6ciu7kvhhb8t70sg1m85ibtb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psique",
+            "certificate_hash": "97676ffb5417c4f6aedec30c1cd9857cb0f6676d"
+          }
+        },
+        {
+          "client_id": "902209161090-13g731vmeni31hd54eplsgr8c86kngf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRIJFbnTCuAqD8dsHAPJoxp_l2Vdxp9d8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902209161090-13g731vmeni31hd54eplsgr8c86kngf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
