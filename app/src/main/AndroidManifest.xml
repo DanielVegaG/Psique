@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Psique">
         <activity
-            android:name=".MainActivity2"
+            android:name=".PrincipalActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
