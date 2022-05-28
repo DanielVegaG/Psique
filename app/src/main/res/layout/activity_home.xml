@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context=".HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,18 +13,17 @@
         android:orientation="vertical">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
+            android:id="@+id/fragmentContainerView4"
             android:name="com.example.psique.fragment_logo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             tools:layout="@layout/fragment_logo" />
 
         <Button
-            android:id="@+id/b_login"
+            android:id="@+id/b_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
-
+            android:text="Salir de la cuenta" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

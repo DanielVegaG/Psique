@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="com.example.psique.fragment_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            tools:layout="@layout/fragment_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:id="@+id/tv_phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Por favor, introduzca su número de teléfono:" />
+
+            <EditText
+                android:id="@+id/et_phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_phoneNumber"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="123 45 67 89"
+                android:inputType="phone"
+                android:minHeight="48dp" />
+
+            <Button
+                android:id="@+id/b_generateVerificationCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generar código de verificación"
+                android:layout_below="@id/et_phoneNumber"/>
+
+            <EditText
+                android:id="@+id/et_verificationCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Código de verificación"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:layout_below="@id/b_generateVerificationCode"/>
+
+            <Button
+                android:id="@+id/b_testVerificationCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comprobar código de verificación"
+                android:layout_below="@id/et_verificationCode"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
