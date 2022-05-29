@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Psique</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="sign_in">Sign in</string>
-    <string name="welcome">Welcome!</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="register">Register</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="invalid_mail">Enter a valid email</string>
-    <string name="UserName">Username</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>

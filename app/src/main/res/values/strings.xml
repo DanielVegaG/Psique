@@ -1,22 +1,13 @@
 <resources>
-    <string name="app_name">Psique</string>
-    <!-- Strings related to login -->
-    <string name="email">Email</string>
-    <string name="password">Contraseña</string>
-    <string name="register">Registrarse</string>
-    <string name="sign_in">Iniciar sesión</string>
-    <string name="welcome">¡Bienvenido!</string>
-    <string name="title_activity_login" translatable="false">LoginActivity</string>
-    <string name="invalid_mail">Ingrese un correo válido</string>
-    <string name="invalid_password">Ingrese una contraseña con al menos 6 digitos</string>
-    <string name="UserName">Nombre de usuario</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="title_activity_navigation" translatable="false">Titulo nav</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="nav_header_title" translatable="false">Nav header title</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name" translatable="false">Psique</string>
+
+    <!--Menu strings-->
+    <string name="navigation_drawer_open">Abrir navigation drawer</string>
+    <string name="navigation_drawer_close">Cerrar navigation drawer</string>
+
+
+
+
+
 
 </resources>

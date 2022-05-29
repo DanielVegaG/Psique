@@ -25,7 +25,7 @@
             android:id="@+id/b_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register" />
+            android:text="Registrarse" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,10 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_logo" />
-        <Button
-            android:id="@+id/b_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salir de la cuenta" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

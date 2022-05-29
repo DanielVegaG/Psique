@@ -29,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         //inicializar atributos
 
 
-
     }
 
 
