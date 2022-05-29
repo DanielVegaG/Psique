@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
         //variables
-    String verifCode;
+    String verifCode;//código de verificación para la autenticación
 
 
     @Override
@@ -73,8 +73,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         /**
-         * Al hacer click en el botón de comprobar código de verificación
-         * se llama al método de comprobar el código de verificación
+         * Al hacer click en el botón de validar código de verificación
+         * si no está vacío el campo del código de verificación,
+         * se llama al método de mandar el código de verificación
+         * pasándole este como parámetro
          */
         b_testVerifCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,14 +148,4 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser!=null){
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
-        }
-    }
 }

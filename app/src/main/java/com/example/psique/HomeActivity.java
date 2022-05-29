@@ -1,11 +1,14 @@
 package com.example.psique;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,11 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class HomeActivity extends AppCompatActivity {
 
     //atributos
-        //elementos del xml
-    private Button b_logout;
+        //menú
 
-    //autenticación de firebase
-    FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +27,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //inicializar atributos
-        b_logout=findViewById(R.id.b_logout);
-        mAuth=FirebaseAuth.getInstance();
 
-        //acciones de botón
-        /**
-         *
-         */
-        b_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                startActivity(new Intent(HomeActivity.this, MainActivity.class));
-                finish();
-            }
-        });
+
+
     }
+
+
 }
