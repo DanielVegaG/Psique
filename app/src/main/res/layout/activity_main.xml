@@ -21,11 +21,31 @@
             android:layout_marginBottom="30dp"
             tools:layout="@layout/fragment_logo" />
 
-        <Button
-            android:id="@+id/b_login"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrarse" />
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:padding="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/b_login"
+                android:layout_gravity="center"
+                android:layout_marginBottom="7dp"
+                android:paddingBottom="15dp"
+                android:text="¿Aún no tiene una cuenta introducida en la aplicación? Introdúzcala aquí:" />
+
+            <Button
+                android:id="@+id/b_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:text="Registrarse" />
+        </RelativeLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

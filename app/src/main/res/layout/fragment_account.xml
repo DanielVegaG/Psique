@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="false"
+    android:orientation="vertical"
     android:background="@color/white">
 
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Cuenta"
-    android:textSize="30sp"
-    android:layout_centerInParent="true"/>
 
-    <Button
-        android:id="@+id/b_logout"
-        android:layout_width="match_parent"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.psique.fragment_logo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Salir de la cuenta" />
+        tools:layout="@layout/fragment_logo" />
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/b_logout"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="7dp"
+            android:paddingBottom="15dp"
+            android:text="Cuenta"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/b_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Salir de la cuenta" />
+    </RelativeLayout>
+
+</LinearLayout>

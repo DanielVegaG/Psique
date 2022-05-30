@@ -92,20 +92,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //métodos
+
+    /**
+     * Manda un código de confirmación al número que se le pasa
+     * @param phoneNumber
+     */
     private void sendVerifCode(String phoneNumber) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber("+34"+phoneNumber)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .setPhoneNumber("+34"+phoneNumber)       // Número para la verificación
+                        .setTimeout(60L, TimeUnit.SECONDS) // El tiempo hasta el Timeout
+                        .setActivity(this)                 // la activity a la que se manda la vuelta
+                        .setCallbacks(mCallbacks)          // para cuando se reciba
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks
     mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
+        /**
+         * Verifica el código automáticamente
+         * @param credential
+         */
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
             final String code = credential.getSmsCode();
@@ -114,26 +122,43 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
+        /**
+         * si la verificación falla, da un aviso
+         * @param e
+         */
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
             Toast.makeText(LoginActivity.this,"Error en la verificación ", Toast.LENGTH_SHORT);
         }
 
+        /**
+         * Se activa cuando se haya enviado un sms al teléfono
+         * @param verificationId
+         * @param token
+         */
         @Override
         public void onCodeSent(@NonNull String verificationId,
                 @NonNull PhoneAuthProvider.ForceResendingToken token) {
             super.onCodeSent(verificationId, token);
             verifCode=verificationId;
-
-
         }
     };
 
+    /**
+     * Verifica el código
+     * y llama al método de iniciar sesión
+     * @param code
+     */
     private void verifyCode(String code) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifCode, code);
         singInByCredentials(credential);
     }
 
+    /**
+     * Inicia sesión con las credenciales
+     * Si fue bien, se inicia la activity del menú
+     * @param credential
+     */
     private void singInByCredentials(PhoneAuthCredential credential) {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInWithCredential(credential)

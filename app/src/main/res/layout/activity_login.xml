@@ -51,6 +51,13 @@
                 android:text="Generar código de verificación"
                 android:layout_below="@id/et_phoneNumber"/>
 
+            <TextView
+                android:id="@+id/tv_verifCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Si no se ha entrado automáticamente en la app al recibir el SMS, escribir el código de verificación manualmente:" />
+
             <EditText
                 android:id="@+id/et_verificationCode"
                 android:layout_width="match_parent"

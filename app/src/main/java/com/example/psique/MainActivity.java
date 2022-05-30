@@ -34,8 +34,11 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Error in start: ", ex.getMessage());
         }
 
-
+        //Inicializar atributos
         b_login=findViewById(R.id.b_login);
+        /**
+         * Abre la activity del login
+         */
         b_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Si hay una sesión no cerrada se inicia directamente el menú
+     */
     @Override
     protected void onStart() {
         super.onStart();
