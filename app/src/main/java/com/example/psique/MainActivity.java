@@ -1,12 +1,13 @@
 package com.example.psique;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,14 +26,14 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Muestra el logo en pantalla completa al iniciar la app
          */
-        try{
+        try {
             Thread.sleep(500);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Log.e("Error in start: ", ex.getMessage());
         }
 
         //Inicializar atributos
-        b_loginProf =findViewById(R.id.b_loginProf);
+        b_loginProf = findViewById(R.id.b_loginProf);
         /**
          * Abre la activity del login del profesional
          */
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        b_loginUser=findViewById(R.id.b_loginUser);
+        b_loginUser = findViewById(R.id.b_loginUser);
         /**
          * Abre la activity del login de usuario
          */
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser!=null){
+        if (currentUser != null) {
             startActivity(new Intent(MainActivity.this, MenuActivity.class));
             finish();
         }

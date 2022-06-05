@@ -7,10 +7,10 @@ public class Help {
     String helpArticleName;
     String helpLink;
 
-    public Help(int helpImageId, String helpTitle,String helpArticleName,String src) {
+    public Help(int helpImageId, String helpTitle, String helpArticleName, String src) {
         this.helpImageId = helpImageId;
         this.helpTitle = helpTitle;
-        this.helpArticleName=helpArticleName;
+        this.helpArticleName = helpArticleName;
         this.helpLink = src;
     }
 
@@ -22,11 +22,17 @@ public class Help {
         this.helpImageId = helpImageId;
     }
 
-    public String getHelpTitle() { return helpTitle; }
+    public String getHelpTitle() {
+        return helpTitle;
+    }
 
-    public void setHelpTitle(String helpTitle) { this.helpTitle = helpTitle; }
+    public void setHelpTitle(String helpTitle) {
+        this.helpTitle = helpTitle;
+    }
 
-    public String getHelpArticleName() { return helpArticleName; }
+    public String getHelpArticleName() {
+        return helpArticleName;
+    }
 
     public void setHelpArticleName(String helpArticleName) {
         this.helpArticleName = helpArticleName;

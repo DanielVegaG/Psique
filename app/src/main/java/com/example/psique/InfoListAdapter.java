@@ -21,12 +21,13 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
     //atributos
     //lista de Info
     private List<Info> links;
-    private LayoutInflater layoutInflater;
-    private Context context;
+    private final LayoutInflater layoutInflater;
+    private final Context context;
 
 
     /**
      * Constructor para dar valores iniciales a
+     *
      * @param itemList, lista de Info
      * @param context
      */
@@ -39,10 +40,11 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
 
     /**
      * Retorna número de ítems que tiene la lista
+     *
      * @return
      */
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return links.size();
     }
 
@@ -51,13 +53,14 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
      * Se le llama cuando el InfoLinksViewHolder necesita ser inicialiado
      * Se le pasa al layout cada ítem del RecyclerView que debería usar
      * Se hace el inflate del layout pasándole el output del constructor del antes inicializado
+     *
      * @param parent
      * @param i
      * @return
      */
     @Override
-    public InfoListAdapter.InfoViewHolder onCreateViewHolder(ViewGroup parent, int i){
-        View view=layoutInflater.inflate(R.layout.list_info,null);
+    public InfoListAdapter.InfoViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        View view = layoutInflater.inflate(R.layout.list_info, null);
         return new InfoListAdapter.InfoViewHolder(view);
     }
 
@@ -66,17 +69,19 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
      * Para especificar los contenidos de cada ítem del RecyclerView
      * (el método es similar al getView() del adapter del ListView
      * Se establecen los valores de la imagen y del enlace
+     *
      * @param infoViewHolder
      * @param position
      */
     @Override
-    public void onBindViewHolder(final InfoListAdapter.InfoViewHolder infoViewHolder, final int position){
+    public void onBindViewHolder(final InfoListAdapter.InfoViewHolder infoViewHolder, final int position) {
         infoViewHolder.cardView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
         infoViewHolder.bindData(links.get(position));
     }
 
     /**
      * Mete nuevos valores a la lista
+     *
      * @param items
      */
     public void setItems(List<Info> items) {
@@ -86,21 +91,21 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
     /**
      *
      */
-    public static class InfoViewHolder extends RecyclerView.ViewHolder{
+    public static class InfoViewHolder extends RecyclerView.ViewHolder {
         ImageView infoImage;
         TextView infoTitle;
         Button infoButton;
         CardView cardView;
 
-        InfoViewHolder(View view){
+        InfoViewHolder(View view) {
             super(view);
-            cardView=(CardView)view.findViewById(R.id.infoCardView);
-            infoImage = (ImageView) view.findViewById(R.id.iv_infoImage);
-            infoTitle= (TextView) view.findViewById(R.id.tv_infoTitle);
-            infoButton = (Button) view.findViewById(R.id.b_infoButton);
+            cardView = view.findViewById(R.id.infoCardView);
+            infoImage = view.findViewById(R.id.iv_infoImage);
+            infoTitle = view.findViewById(R.id.tv_infoTitle);
+            infoButton = view.findViewById(R.id.b_infoButton);
         }
 
-        void bindData(final Info item){
+        void bindData(final Info item) {
             infoImage.setImageResource(item.getInfoImageId());
             infoTitle.setText(item.getInfoTitle());
             infoButton.setText(item.getInfoArticleName());
@@ -113,8 +118,6 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
             });
         }
     }
-
-
 
 
 }

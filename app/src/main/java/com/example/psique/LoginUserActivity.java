@@ -25,17 +25,51 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginUserActivity extends AppCompatActivity {
 
+    //autenticación de firebase
+    FirebaseAuth mAuth;
+    //variables
+    String verifCode;//código de verificación para la autenticación
     //atributos
-        //elementos del xml
+    //elementos del xml
     private EditText et_phone, et_verifCode;
     private Button b_generateVerifCode, b_testVerifCode;
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks
+            mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        /**
+         * Verifica el código automáticamente
+         * @param credential
+         */
+        @Override
+        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
+            final String code = credential.getSmsCode();
+            if (code != null) {
+                verifyCode(code);
+            }
+        }
 
-        //autenticación de firebase
-    FirebaseAuth mAuth;
+        /**
+         * si la verificación falla, da un aviso
+         * @param e
+         */
+        @Override
+        public void onVerificationFailed(@NonNull FirebaseException e) {
+            Toast.makeText(LoginUserActivity.this, "Error en la verificación ", Toast.LENGTH_SHORT);
+        }
 
-        //variables
-    String verifCode;//código de verificación para la autenticación
+        /**
+         * Se activa cuando se haya enviado un sms al teléfono
+         * @param verificationId
+         * @param token
+         */
+        @Override
+        public void onCodeSent(@NonNull String verificationId,
+                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
+            super.onCodeSent(verificationId, token);
+            verifCode = verificationId;
+        }
+    };
 
+    //métodos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +78,12 @@ public class LoginUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_user);
 
         //inicializar atributos
-        et_phone=findViewById(R.id.et_phoneNumber);
-        et_verifCode=findViewById(R.id.et_verificationCode);
-        b_generateVerifCode=findViewById(R.id.b_generateVerificationCode);
-        b_testVerifCode=findViewById(R.id.b_testVerificationCode);
+        et_phone = findViewById(R.id.et_phoneNumber);
+        et_verifCode = findViewById(R.id.et_verificationCode);
+        b_generateVerifCode = findViewById(R.id.b_generateVerificationCode);
+        b_testVerifCode = findViewById(R.id.b_testVerificationCode);
 
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
 
         //acciones de botón
@@ -62,10 +96,10 @@ public class LoginUserActivity extends AppCompatActivity {
         b_generateVerifCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(et_phone.getText().toString())){
-                    Toast.makeText(LoginUserActivity.this, "Introduce un número de teléfono válido",Toast.LENGTH_SHORT).show();
-                }else{
-                    String phoneNumber=et_phone.getText().toString().replace(" ","");
+                if (TextUtils.isEmpty(et_phone.getText().toString())) {
+                    Toast.makeText(LoginUserActivity.this, "Introduce un número de teléfono válido", Toast.LENGTH_SHORT).show();
+                } else {
+                    String phoneNumber = et_phone.getText().toString().replace(" ", "");
                     sendVerifCode(phoneNumber);
                     Toast.makeText(LoginUserActivity.this, "SMS enviado", Toast.LENGTH_SHORT).show();
                 }
@@ -81,26 +115,25 @@ public class LoginUserActivity extends AppCompatActivity {
         b_testVerifCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(et_verifCode.getText().toString())){
-                    Toast.makeText(LoginUserActivity.this, "Código de verificación incorrecto",Toast.LENGTH_SHORT).show();
-                }else{
-                    String c=et_verifCode.getText().toString();
+                if (TextUtils.isEmpty(et_verifCode.getText().toString())) {
+                    Toast.makeText(LoginUserActivity.this, "Código de verificación incorrecto", Toast.LENGTH_SHORT).show();
+                } else {
+                    String c = et_verifCode.getText().toString();
                     verifyCode(verifCode);
                 }
             }
         });
     }
 
-    //métodos
-
     /**
      * Manda un código de confirmación al número que se le pasa
+     *
      * @param phoneNumber
      */
     private void sendVerifCode(String phoneNumber) {
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber("+34"+phoneNumber)       // Número para la verificación
+                        .setPhoneNumber("+34" + phoneNumber)       // Número para la verificación
                         .setTimeout(60L, TimeUnit.SECONDS) // El tiempo hasta el Timeout
                         .setActivity(this)                 // la activity a la que se manda la vuelta
                         .setCallbacks(mCallbacks)          // para cuando se reciba
@@ -108,45 +141,10 @@ public class LoginUserActivity extends AppCompatActivity {
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
-    mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        /**
-         * Verifica el código automáticamente
-         * @param credential
-         */
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential credential) {
-            final String code = credential.getSmsCode();
-            if(code!=null){
-                verifyCode(code);
-            }
-        }
-
-        /**
-         * si la verificación falla, da un aviso
-         * @param e
-         */
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(LoginUserActivity.this,"Error en la verificación ", Toast.LENGTH_SHORT);
-        }
-
-        /**
-         * Se activa cuando se haya enviado un sms al teléfono
-         * @param verificationId
-         * @param token
-         */
-        @Override
-        public void onCodeSent(@NonNull String verificationId,
-                @NonNull PhoneAuthProvider.ForceResendingToken token) {
-            super.onCodeSent(verificationId, token);
-            verifCode=verificationId;
-        }
-    };
-
     /**
      * Verifica el código
      * y llama al método de iniciar sesión
+     *
      * @param code
      */
     private void verifyCode(String code) {
@@ -157,6 +155,7 @@ public class LoginUserActivity extends AppCompatActivity {
     /**
      * Inicia sesión con las credenciales
      * Si fue bien, se inicia la activity del menú
+     *
      * @param credential
      */
     private void singInByCredentials(PhoneAuthCredential credential) {
@@ -165,9 +164,9 @@ public class LoginUserActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(LoginUserActivity.this,"R",Toast.LENGTH_SHORT);
-                            startActivity(new Intent(LoginUserActivity.this,MenuActivity.class));
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginUserActivity.this, "R", Toast.LENGTH_SHORT);
+                            startActivity(new Intent(LoginUserActivity.this, MenuActivity.class));
                         }
                     }
                 });

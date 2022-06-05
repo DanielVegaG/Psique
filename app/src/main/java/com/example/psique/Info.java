@@ -6,10 +6,10 @@ public class Info {
     String infoArticleName;
     String infoLink;
 
-    public Info(int infoImageId, String infoTitle,String infoArticleName,String src) {
+    public Info(int infoImageId, String infoTitle, String infoArticleName, String src) {
         this.infoImageId = infoImageId;
         this.infoTitle = infoTitle;
-        this.infoArticleName=infoArticleName;
+        this.infoArticleName = infoArticleName;
         this.infoLink = src;
     }
 
@@ -21,11 +21,17 @@ public class Info {
         this.infoImageId = infoImageId;
     }
 
-    public String getInfoTitle() { return infoTitle; }
+    public String getInfoTitle() {
+        return infoTitle;
+    }
 
-    public void setInfoTitle(String infoTitle) { this.infoTitle = infoTitle; }
+    public void setInfoTitle(String infoTitle) {
+        this.infoTitle = infoTitle;
+    }
 
-    public String getInfoArticleName() { return infoArticleName; }
+    public String getInfoArticleName() {
+        return infoArticleName;
+    }
 
     public void setInfoArticleName(String infoArticleName) {
         this.infoArticleName = infoArticleName;

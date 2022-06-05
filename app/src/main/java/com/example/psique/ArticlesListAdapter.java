@@ -21,12 +21,13 @@ public class ArticlesListAdapter extends RecyclerView.Adapter<ArticlesListAdapte
     //atributos
     //lista de Articles
     private List<Articles> links;
-    private LayoutInflater layoutInflater;
-    private Context context;
+    private final LayoutInflater layoutInflater;
+    private final Context context;
 
 
     /**
      * Constructor para dar valores iniciales a
+     *
      * @param itemList, lista de Articles
      * @param context
      */
@@ -39,10 +40,11 @@ public class ArticlesListAdapter extends RecyclerView.Adapter<ArticlesListAdapte
 
     /**
      * Retorna número de ítems que tiene la lista
+     *
      * @return
      */
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return links.size();
     }
 
@@ -51,13 +53,14 @@ public class ArticlesListAdapter extends RecyclerView.Adapter<ArticlesListAdapte
      * Se le llama cuando el ArticlesLinksViewHolder necesita ser inicialiado
      * Se le pasa al layout cada ítem del RecyclerView que debería usar
      * Se hace el inflate del layout pasándole el output del constructor del antes inicializado
+     *
      * @param parent
      * @param i
      * @return
      */
     @Override
-    public ArticlesListAdapter.ArticlesViewHolder onCreateViewHolder(ViewGroup parent, int i){
-        View view=layoutInflater.inflate(R.layout.list_articles,null);
+    public ArticlesListAdapter.ArticlesViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        View view = layoutInflater.inflate(R.layout.list_articles, null);
         return new ArticlesListAdapter.ArticlesViewHolder(view);
     }
 
@@ -66,17 +69,19 @@ public class ArticlesListAdapter extends RecyclerView.Adapter<ArticlesListAdapte
      * Para especificar los contenidos de cada ítem del RecyclerView
      * (el método es similar al getView() del adapter del ListView
      * Se establecen los valores de la imagen y del enlace
+     *
      * @param articlesViewHolder
      * @param position
      */
     @Override
-    public void onBindViewHolder(final ArticlesListAdapter.ArticlesViewHolder articlesViewHolder, final int position){
+    public void onBindViewHolder(final ArticlesListAdapter.ArticlesViewHolder articlesViewHolder, final int position) {
         articlesViewHolder.cardView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
         articlesViewHolder.bindData(links.get(position));
     }
 
     /**
      * Mete nuevos valores a la lista
+     *
      * @param items
      */
     public void setItems(List<Articles> items) {
@@ -86,21 +91,21 @@ public class ArticlesListAdapter extends RecyclerView.Adapter<ArticlesListAdapte
     /**
      *
      */
-    public static class ArticlesViewHolder extends RecyclerView.ViewHolder{
+    public static class ArticlesViewHolder extends RecyclerView.ViewHolder {
         ImageView articlesImage;
         TextView articlesTitle;
         Button articlesButton;
         CardView cardView;
 
-        ArticlesViewHolder(View view){
+        ArticlesViewHolder(View view) {
             super(view);
-            cardView=(CardView)view.findViewById(R.id.articlesCardView);
-            articlesImage = (ImageView) view.findViewById(R.id.iv_articlesImage);
-            articlesTitle= (TextView) view.findViewById(R.id.tv_articlesTitle);
-            articlesButton = (Button) view.findViewById(R.id.b_articlesButton);
+            cardView = view.findViewById(R.id.articlesCardView);
+            articlesImage = view.findViewById(R.id.iv_articlesImage);
+            articlesTitle = view.findViewById(R.id.tv_articlesTitle);
+            articlesButton = view.findViewById(R.id.b_articlesButton);
         }
 
-        void bindData(final Articles item){
+        void bindData(final Articles item) {
             articlesImage.setImageResource(item.getArticlesImageId());
             articlesTitle.setText(item.getArticlesTitle());
             articlesButton.setText(item.getArticlesArticleName());
@@ -113,8 +118,6 @@ public class ArticlesListAdapter extends RecyclerView.Adapter<ArticlesListAdapte
             });
         }
     }
-
-
 
 
 }

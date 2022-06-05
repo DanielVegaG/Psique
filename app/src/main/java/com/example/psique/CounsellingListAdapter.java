@@ -21,12 +21,13 @@ public class CounsellingListAdapter extends RecyclerView.Adapter<CounsellingList
     //atributos
     //lista de Counselling
     private List<Counselling> links;
-    private LayoutInflater layoutInflater;
-    private Context context;
+    private final LayoutInflater layoutInflater;
+    private final Context context;
 
 
     /**
      * Constructor para dar valores iniciales a
+     *
      * @param itemList, lista de Counselling
      * @param context
      */
@@ -39,10 +40,11 @@ public class CounsellingListAdapter extends RecyclerView.Adapter<CounsellingList
 
     /**
      * Retorna número de ítems que tiene la lista
+     *
      * @return
      */
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return links.size();
     }
 
@@ -51,13 +53,14 @@ public class CounsellingListAdapter extends RecyclerView.Adapter<CounsellingList
      * Se le llama cuando el CounsellingLinksViewHolder necesita ser inicialiado
      * Se le pasa al layout cada ítem del RecyclerView que debería usar
      * Se hace el inflate del layout pasándole el output del constructor del antes inicializado
+     *
      * @param parent
      * @param i
      * @return
      */
     @Override
-    public CounsellingListAdapter.CounsellingViewHolder onCreateViewHolder(ViewGroup parent, int i){
-        View view=layoutInflater.inflate(R.layout.list_counselling,null);
+    public CounsellingListAdapter.CounsellingViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        View view = layoutInflater.inflate(R.layout.list_counselling, null);
         return new CounsellingListAdapter.CounsellingViewHolder(view);
     }
 
@@ -66,17 +69,19 @@ public class CounsellingListAdapter extends RecyclerView.Adapter<CounsellingList
      * Para especificar los contenidos de cada ítem del RecyclerView
      * (el método es similar al getView() del adapter del ListView
      * Se establecen los valores de la imagen y del enlace
+     *
      * @param counsellingViewHolder
      * @param position
      */
     @Override
-    public void onBindViewHolder(final CounsellingListAdapter.CounsellingViewHolder counsellingViewHolder, final int position){
+    public void onBindViewHolder(final CounsellingListAdapter.CounsellingViewHolder counsellingViewHolder, final int position) {
         counsellingViewHolder.cardView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
         counsellingViewHolder.bindData(links.get(position));
     }
 
     /**
      * Mete nuevos valores a la lista
+     *
      * @param items
      */
     public void setItems(List<Counselling> items) {
@@ -86,21 +91,21 @@ public class CounsellingListAdapter extends RecyclerView.Adapter<CounsellingList
     /**
      *
      */
-    public static class CounsellingViewHolder extends RecyclerView.ViewHolder{
+    public static class CounsellingViewHolder extends RecyclerView.ViewHolder {
         ImageView counsellingImage;
         TextView counsellingTitle;
         Button counsellingButton;
         CardView cardView;
 
-        CounsellingViewHolder(View view){
+        CounsellingViewHolder(View view) {
             super(view);
-            cardView=(CardView)view.findViewById(R.id.counsellingCardView);
-            counsellingImage = (ImageView) view.findViewById(R.id.iv_counsellingImage);
-            counsellingTitle= (TextView) view.findViewById(R.id.tv_counsellingTitle);
-            counsellingButton = (Button) view.findViewById(R.id.b_counsellingButton);
+            cardView = view.findViewById(R.id.counsellingCardView);
+            counsellingImage = view.findViewById(R.id.iv_counsellingImage);
+            counsellingTitle = view.findViewById(R.id.tv_counsellingTitle);
+            counsellingButton = view.findViewById(R.id.b_counsellingButton);
         }
 
-        void bindData(final Counselling item){
+        void bindData(final Counselling item) {
             counsellingImage.setImageResource(item.getCounsellingImageId());
             counsellingTitle.setText(item.getCounsellingTitle());
             counsellingButton.setText(item.getCounsellingArticleName());
@@ -113,8 +118,6 @@ public class CounsellingListAdapter extends RecyclerView.Adapter<CounsellingList
             });
         }
     }
-
-
 
 
 }

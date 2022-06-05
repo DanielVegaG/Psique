@@ -19,13 +19,13 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home,container,false);//para el menú
+        return inflater.inflate(R.layout.fragment_home, container, false);//para el menú
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //inicializar atributos
-        b_help = (Button) getView().findViewById(R.id.b_help);
+        b_help = getView().findViewById(R.id.b_help);
         b_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        b_info = (Button) getView().findViewById(R.id.b_info);
+        b_info = getView().findViewById(R.id.b_info);
         b_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        b_articles = (Button) getView().findViewById(R.id.b_articles);
+        b_articles = getView().findViewById(R.id.b_articles);
         b_articles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        b_news = (Button) getView().findViewById(R.id.b_news);
+        b_news = getView().findViewById(R.id.b_news);
         b_news.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        b_counselling = (Button) getView().findViewById(R.id.b_counselling);
+        b_counselling = getView().findViewById(R.id.b_counselling);
         b_counselling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -6,10 +6,10 @@ public class Counselling {
     String counsellingArticleName;
     String counsellingLink;
 
-    public Counselling(int counsellingImageId, String counsellingTitle,String counsellingArticleName,String src) {
+    public Counselling(int counsellingImageId, String counsellingTitle, String counsellingArticleName, String src) {
         this.counsellingImageId = counsellingImageId;
         this.counsellingTitle = counsellingTitle;
-        this.counsellingArticleName=counsellingArticleName;
+        this.counsellingArticleName = counsellingArticleName;
         this.counsellingLink = src;
     }
 
@@ -21,11 +21,17 @@ public class Counselling {
         this.counsellingImageId = counsellingImageId;
     }
 
-    public String getCounsellingTitle() { return counsellingTitle; }
+    public String getCounsellingTitle() {
+        return counsellingTitle;
+    }
 
-    public void setCounsellingTitle(String counsellingTitle) { this.counsellingTitle = counsellingTitle; }
+    public void setCounsellingTitle(String counsellingTitle) {
+        this.counsellingTitle = counsellingTitle;
+    }
 
-    public String getCounsellingArticleName() { return counsellingArticleName; }
+    public String getCounsellingArticleName() {
+        return counsellingArticleName;
+    }
 
     public void setCounsellingArticleName(String counsellingArticleName) {
         this.counsellingArticleName = counsellingArticleName;

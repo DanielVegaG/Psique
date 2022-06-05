@@ -6,10 +6,10 @@ public class Articles {
     String articlesArticleName;
     String articlesLink;
 
-    public Articles(int articlesImageId, String articlesTitle,String articlesArticleName,String src) {
+    public Articles(int articlesImageId, String articlesTitle, String articlesArticleName, String src) {
         this.articlesImageId = articlesImageId;
         this.articlesTitle = articlesTitle;
-        this.articlesArticleName=articlesArticleName;
+        this.articlesArticleName = articlesArticleName;
         this.articlesLink = src;
     }
 
@@ -21,11 +21,17 @@ public class Articles {
         this.articlesImageId = articlesImageId;
     }
 
-    public String getArticlesTitle() { return articlesTitle; }
+    public String getArticlesTitle() {
+        return articlesTitle;
+    }
 
-    public void setArticlesTitle(String articlesTitle) { this.articlesTitle = articlesTitle; }
+    public void setArticlesTitle(String articlesTitle) {
+        this.articlesTitle = articlesTitle;
+    }
 
-    public String getArticlesArticleName() { return articlesArticleName; }
+    public String getArticlesArticleName() {
+        return articlesArticleName;
+    }
 
     public void setArticlesArticleName(String articlesArticleName) {
         this.articlesArticleName = articlesArticleName;

@@ -6,10 +6,10 @@ public class News {
     String newsArticleName;
     String newsLink;
 
-    public News(int newsImageId, String newsTitle,String newsArticleName,String src) {
+    public News(int newsImageId, String newsTitle, String newsArticleName, String src) {
         this.newsImageId = newsImageId;
         this.newsTitle = newsTitle;
-        this.newsArticleName=newsArticleName;
+        this.newsArticleName = newsArticleName;
         this.newsLink = src;
     }
 
@@ -21,11 +21,17 @@ public class News {
         this.newsImageId = newsImageId;
     }
 
-    public String getNewsTitle() { return newsTitle; }
+    public String getNewsTitle() {
+        return newsTitle;
+    }
 
-    public void setNewsTitle(String newsTitle) { this.newsTitle = newsTitle; }
+    public void setNewsTitle(String newsTitle) {
+        this.newsTitle = newsTitle;
+    }
 
-    public String getNewsArticleName() { return newsArticleName; }
+    public String getNewsArticleName() {
+        return newsArticleName;
+    }
 
     public void setNewsArticleName(String newsArticleName) {
         this.newsArticleName = newsArticleName;

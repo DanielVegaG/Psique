@@ -21,12 +21,13 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
     //atributos
     //lista de News
     private List<News> links;
-    private LayoutInflater layoutInflater;
-    private Context context;
+    private final LayoutInflater layoutInflater;
+    private final Context context;
 
 
     /**
      * Constructor para dar valores iniciales a
+     *
      * @param itemList, lista de News
      * @param context
      */
@@ -39,10 +40,11 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 
     /**
      * Retorna número de ítems que tiene la lista
+     *
      * @return
      */
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return links.size();
     }
 
@@ -51,13 +53,14 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
      * Se le llama cuando el NewsLinksViewHolder necesita ser inicialiado
      * Se le pasa al layout cada ítem del RecyclerView que debería usar
      * Se hace el inflate del layout pasándole el output del constructor del antes inicializado
+     *
      * @param parent
      * @param i
      * @return
      */
     @Override
-    public NewsListAdapter.NewsViewHolder onCreateViewHolder(ViewGroup parent, int i){
-        View view=layoutInflater.inflate(R.layout.list_news,null);
+    public NewsListAdapter.NewsViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        View view = layoutInflater.inflate(R.layout.list_news, null);
         return new NewsListAdapter.NewsViewHolder(view);
     }
 
@@ -66,17 +69,19 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
      * Para especificar los contenidos de cada ítem del RecyclerView
      * (el método es similar al getView() del adapter del ListView
      * Se establecen los valores de la imagen y del enlace
+     *
      * @param newsViewHolder
      * @param position
      */
     @Override
-    public void onBindViewHolder(final NewsListAdapter.NewsViewHolder newsViewHolder, final int position){
+    public void onBindViewHolder(final NewsListAdapter.NewsViewHolder newsViewHolder, final int position) {
         newsViewHolder.cardView.setAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_transition));
         newsViewHolder.bindData(links.get(position));
     }
 
     /**
      * Mete nuevos valores a la lista
+     *
      * @param items
      */
     public void setItems(List<News> items) {
@@ -86,21 +91,21 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
     /**
      *
      */
-    public static class NewsViewHolder extends RecyclerView.ViewHolder{
+    public static class NewsViewHolder extends RecyclerView.ViewHolder {
         ImageView newsImage;
         TextView newsTitle;
         Button newsButton;
         CardView cardView;
 
-        NewsViewHolder(View view){
+        NewsViewHolder(View view) {
             super(view);
-            cardView=(CardView)view.findViewById(R.id.newsCardView);
-            newsImage = (ImageView) view.findViewById(R.id.iv_newsImage);
-            newsTitle= (TextView) view.findViewById(R.id.tv_newsTitle);
-            newsButton = (Button) view.findViewById(R.id.b_newsButton);
+            cardView = view.findViewById(R.id.newsCardView);
+            newsImage = view.findViewById(R.id.iv_newsImage);
+            newsTitle = view.findViewById(R.id.tv_newsTitle);
+            newsButton = view.findViewById(R.id.b_newsButton);
         }
 
-        void bindData(final News item){
+        void bindData(final News item) {
             newsImage.setImageResource(item.getNewsImageId());
             newsTitle.setText(item.getNewsTitle());
             newsButton.setText(item.getNewsArticleName());
@@ -113,8 +118,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
             });
         }
     }
-
-
 
 
 }

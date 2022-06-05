@@ -17,12 +17,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountFragment extends Fragment {
 
+    //autenticación de firebase
+    FirebaseAuth mAuth;
     //atributos
     //elementos del xml
     private Button b_logout;
-
-    //autenticación de firebase
-    FirebaseAuth mAuth;
 
     @Nullable
     @Override
@@ -33,7 +32,7 @@ public class AccountFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //inicializar atributos
-        b_logout = (Button) getView().findViewById(R.id.b_logout);
+        b_logout = getView().findViewById(R.id.b_logout);
         mAuth = FirebaseAuth.getInstance();
 
         //acciones de botón
@@ -53,7 +52,7 @@ public class AccountFragment extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int in) {
                                 mAuth.signOut();
                                 Intent i = new Intent(getActivity(), MainActivity.class);
-                                ((MenuActivity) getActivity()).startActivity(i);
+                                getActivity().startActivity(i);
                             }
                         })
                         .setNegativeButton("No", null)
