@@ -1,10 +1,7 @@
 package com.example.psique;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     //atributes
-    Button b_login;
+    Button b_loginProf, b_loginUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +32,26 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Inicializar atributos
-        b_login=findViewById(R.id.b_login);
+        b_loginProf =findViewById(R.id.b_loginProf);
         /**
-         * Abre la activity del login
+         * Abre la activity del login del profesional
          */
-        b_login.setOnClickListener(new View.OnClickListener() {
+        b_loginProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginProfActivity.class));
+                finish();
+            }
+        });
+
+        b_loginUser=findViewById(R.id.b_loginUser);
+        /**
+         * Abre la activity del login de usuario
+         */
+        b_loginUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LoginUserActivity.class));
                 finish();
             }
         });

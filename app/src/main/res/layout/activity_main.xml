@@ -32,19 +32,30 @@
                 android:id="@+id/tv_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/b_login"
+                android:layout_above="@+id/b_loginProf"
                 android:layout_gravity="center"
                 android:layout_marginBottom="7dp"
-                android:paddingBottom="15dp"
+                android:paddingBottom="30dp"
                 android:text="¿Aún no tiene una cuenta introducida en la aplicación? Introdúzcala aquí:" />
 
             <Button
-                android:id="@+id/b_login"
+                android:id="@+id/b_loginProf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:text="Registrarse" />
+                android:background="@drawable/rounded_button"
+                android:text="Registrarse como profesional" />
+            <Button
+                android:id="@+id/b_loginUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_below="@id/b_loginProf"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_button"
+                android:text="Registrarse como no profesional" />
         </RelativeLayout>
 
     </LinearLayout>
