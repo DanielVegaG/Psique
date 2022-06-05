@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 }else{
                     String phoneNumber=et_phone.getText().toString().replace(" ","");
                     sendVerifCode(phoneNumber);
+                    Toast.makeText(LoginActivity.this, "SMS enviado", Toast.LENGTH_SHORT).show();
                 }
             }
         });

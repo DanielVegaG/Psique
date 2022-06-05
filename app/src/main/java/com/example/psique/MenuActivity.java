@@ -25,7 +25,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
 
         //inicializar atributos
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarMenú);
         setSupportActionBar(toolbar);
 
         drawer_layout = findViewById(R.id.drawer_layout);

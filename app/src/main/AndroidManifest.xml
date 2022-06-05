@@ -10,18 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Psique">
         <activity
+            android:name=".CounsellingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArticlesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReciclerView"
+            android:exported="false" />
+        <activity
+            android:name=".HelpActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false"
-            android:theme="@style/Theme.Psique.NoActionBar"/>
-        <activity
-            android:name=".ChatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AccountActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
+            android:theme="@style/Theme.Psique.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
