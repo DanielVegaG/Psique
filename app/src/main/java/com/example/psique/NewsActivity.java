@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,8 @@ public class NewsActivity extends AppCompatActivity {
         newsList.add(new News(newspaperId, "Periódico", "Cómo reconocer la timidez extrema y consejos para superarla", "https://www.mundodeportivo.com/vidae/psicologia-bienestar/20220606/1001816234/como-reconocer-timidez-extrema-consejos-superarla-isc.html", "2022/06/06"));
         newsList.add(new News(newspaperId, "Periódico", "Controlar nervios para selectividad", "https://www.lasexta.com/bienestar/psicologia/como-controlar-nervios-aumentar-confianza-dias-evau-selectividad-pautas-psicologos_20220606629a35c71d1a9700019e2c75.html", "2022/06/06"));
         newsList.add(new News(newspaperId, "Periódico", "Deborah Calvo, psicóloga clínico-forense", "https://www.elespanol.com/mujer/protagonistas/20220606/deborah-calvo-psicologa-clinico-forense-conozco-sinrazon-oscuro/677682242_0.html", "2022/06/06"));
+        newsList.add(new News(newspaperId, "Periódico", "\"Me corto para sentir dolor físico, no mental\"", "https://elpais.com/america-colombia/2022-06-06/mariana-14-anos-me-corto-para-sentir-dolor-fisico-y-no-mental.html", "2022/06/06"));
+        newsList.add(new News(newspaperId, "Periódico", "Desafíos de la salud mental y oportunidades de futuro para la psicología", "https://elpais.com/economia/formacion/2021-10-28/desafios-de-la-salud-mental-y-oportunidades-de-futuro-para-la-psicologia.html", "2021/10/28"));
 
         newsList.add(new News(progressId, "Avances", "Revista de la Facultad de Psicología y Humanidades Vol.29 Num.2", "https://revistas.unife.edu.pe/index.php/avancesenpsicologia/issue/view/183", "2021/11/19"));
         newsList.add(new News(progressId, "Avances", "¿Los animales no domésticos perciben nuestras emociones si les hablamos?", "https://noticiasdelaciencia.com/art/44373/los-animales-no-domesticos-perciben-nuestras-emociones-si-les-hablamos", "2022/06/03"));
@@ -105,15 +108,16 @@ public class NewsActivity extends AppCompatActivity {
                 Log.e("Tamaño", i + "");
                 if (i + 1 < newsList.size()) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                    //try{
-                    String firstDate = newsList.get(i).getNewsTitle();
-                    Toast.makeText(this, "Primera fecha: " + firstDate, Toast.LENGTH_LONG).show();
-                    //if(sdf.parse(newsList.get(i).getNewsDate()).before(sdf.parse(newsList.get(i+1).getNewsDate()))){
-                    //Toast.makeText(this, sdf.parse(newsList.get(i).getNewsDate()).before(sdf.parse(newsList.get(i+1).getNewsDate()))+"hola", Toast.LENGTH_SHORT).show();
-                    //}
-                    //}catch (ParseException pe){
-                    //Log.e("Error",pe.getMessage());
-                    //}
+                    try{
+                        String firstDate = newsList.get(i).getNewsDate();
+                        String secondDate = newsList.get(i+1).getNewsDate();
+                        if(sdf.parse(firstDate).before(sdf.parse(secondDate))){
+                            News itemPop = newsList.remove(i);
+                            newsList.add(itemPop);
+                        }
+                    }catch (ParseException pe){
+                        Log.e("Error",pe.getMessage());
+                    }
 
                 }
             }

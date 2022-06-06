@@ -93,7 +93,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
      */
     public static class NewsViewHolder extends RecyclerView.ViewHolder {
         ImageView newsImage;
-        TextView newsTitle;
+        TextView newsTitle, newsDate;
         Button newsButton;
         CardView cardView;
 
@@ -103,12 +103,14 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
             newsImage = view.findViewById(R.id.iv_newsImage);
             newsTitle = view.findViewById(R.id.tv_newsTitle);
             newsButton = view.findViewById(R.id.b_newsButton);
+            newsDate = view.findViewById(R.id.tv_newsDate);
         }
 
         void bindData(final News item) {
             newsImage.setImageResource(item.getNewsImageId());
             newsTitle.setText(item.getNewsTitle());
             newsButton.setText(item.getNewsArticleName());
+            newsDate.setText(item.getNewsDate());
             newsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

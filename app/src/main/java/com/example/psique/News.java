@@ -8,7 +8,7 @@ public class News {
     String newsLink;
     String newsDate;
 
-    public News(int newsImageId, String newsTitle, String newsArticleName, String src, String date) {
+    public News(int newsImageId, String newsTitle, String newsArticleName, String src, String newsDate) {
         this.newsImageId = newsImageId;
         this.newsTitle = newsTitle;
         this.newsArticleName = newsArticleName;

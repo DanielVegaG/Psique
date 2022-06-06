@@ -78,9 +78,9 @@ public class LoginUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_user);
 
         //inicializar atributos
-        et_phone = findViewById(R.id.et_phoneNumber);
+        et_phone = findViewById(R.id.et_userId);
         et_verifCode = findViewById(R.id.et_verificationCode);
-        b_generateVerifCode = findViewById(R.id.b_generateVerificationCode);
+        b_generateVerifCode = findViewById(R.id.b_login);
         b_testVerifCode = findViewById(R.id.b_testVerificationCode);
 
         mAuth = FirebaseAuth.getInstance();

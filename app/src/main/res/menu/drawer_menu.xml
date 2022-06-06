@@ -8,7 +8,7 @@
             android:icon="@drawable/menu_ic_learn"
             android:title="Aprender" />
         <item
-            android:id="@+id/nav_chat"
+            android:id="@+id/nav_chatActivity"
             android:icon="@drawable/menu_ic_chat"
             android:title="Chat" />
         <item

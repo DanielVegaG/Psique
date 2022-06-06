@@ -35,56 +35,31 @@
                 android:src="@drawable/login_professional" />
 
             <TextView
-                android:id="@+id/tv_phoneNumber"
+                android:id="@+id/tv_userId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
-                android:text="Por favor, introduzca su número de teléfono:" />
+                android:paddingTop="30dp"
+                android:text="Por favor, introduzca su ID de usuario" />
 
             <EditText
-                android:id="@+id/et_phoneNumber"
+                android:id="@+id/et_userId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_phoneNumber"
+                android:layout_below="@id/tv_userId"
                 android:layout_marginBottom="20dp"
                 android:ems="10"
-                android:hint="123 45 67 89"
-                android:inputType="phone"
+                android:hint="Id"
+                android:inputType="textAutoComplete"
                 android:minHeight="48dp" />
 
             <Button
-                android:id="@+id/b_generateVerificationCode"
+                android:id="@+id/b_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Generar código de verificación"
-                android:layout_below="@id/et_phoneNumber"
-                android:background="@drawable/rounded_button"/>
+                android:layout_below="@id/et_userId"
+                android:background="@drawable/rounded_button"
+                android:text="Registrarse" />
 
-            <TextView
-                android:id="@+id/tv_verifCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Si no se ha entrado automáticamente en la app al recibir el SMS, escribir el código de verificación manualmente:" />
-
-            <EditText
-                android:id="@+id/et_verificationCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:ems="10"
-                android:hint="Código de verificación"
-                android:inputType="number"
-                android:minHeight="48dp"
-                android:layout_below="@id/b_generateVerificationCode"/>
-
-            <Button
-                android:id="@+id/b_testVerificationCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Comprobar código de verificación"
-                android:layout_below="@id/et_verificationCode"
-                android:background="@drawable/rounded_button"/>
         </LinearLayout>
 
     </LinearLayout>

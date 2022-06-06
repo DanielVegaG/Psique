@@ -5,8 +5,9 @@ pluginManagement {
         mavenCentral()
         maven() {
             url "https://jitpack.io"
-        }
+            }
         jcenter()
+
     }
 }
 dependencyResolutionManagement {
@@ -15,7 +16,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-
+        maven {
+            url "https://dl.cloudsmith.io/public/cometchat/cometchat-pro-android/maven/"
+        }
     }
 }
 rootProject.name = "Psique"
