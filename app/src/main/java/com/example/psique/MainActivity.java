@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     //atributes
-    Button b_loginProf, b_loginUser;
+    Button b_loginProf, b_loginUser, b_quitar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        b_quitar = findViewById(R.id.b_quitar);
+        b_quitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                finish();
+            }
+        });
     }
 
     /**

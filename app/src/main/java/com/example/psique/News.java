@@ -1,16 +1,19 @@
 package com.example.psique;
 
+
 public class News {
     int newsImageId;
     String newsTitle;
     String newsArticleName;
     String newsLink;
+    String newsDate;
 
-    public News(int newsImageId, String newsTitle, String newsArticleName, String src) {
+    public News(int newsImageId, String newsTitle, String newsArticleName, String src, String date) {
         this.newsImageId = newsImageId;
         this.newsTitle = newsTitle;
         this.newsArticleName = newsArticleName;
         this.newsLink = src;
+        this.newsDate = newsDate;
     }
 
     public int getNewsImageId() {
@@ -43,5 +46,13 @@ public class News {
 
     public void setNewsLink(String newsLink) {
         this.newsLink = newsLink;
+    }
+
+    public String getNewsDate() {
+        return newsDate;
+    }
+
+    public void setNewsDate(String newsDate) {
+        this.newsDate = newsDate;
     }
 }
