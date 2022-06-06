@@ -32,7 +32,7 @@
                 android:layout_width="273dp"
                 android:layout_height="125dp"
                 android:layout_gravity="center"
-                android:src="@drawable/user" />
+                android:src="@drawable/login_user" />
 
             <TextView
                 android:id="@+id/tv_phoneNumber"

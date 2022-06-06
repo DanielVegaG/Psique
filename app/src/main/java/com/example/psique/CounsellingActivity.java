@@ -43,22 +43,31 @@ public class CounsellingActivity extends AppCompatActivity {
     public void populateList() {
         counsellingList = new ArrayList<>();
 
-        int depressionId = R.drawable.depression;
-        int anxietyId = R.drawable.anxiety;
-        int eatingDisorderId = R.drawable.eating_disorder;
+        int bachilleratoId = R.drawable.councelling_bachelor;
+        int accesoCarreraId = R.drawable.councelling_access;
+        int fpId = R.drawable.councelling_fp;
+        int gradoId= R.drawable.councelling_university;
 
-        counsellingList.add(new Counselling(depressionId, "Depresión", "Neurotrophins and depression", "https://www.sciencedirect.com/science/article/abs/pii/S0165614799013097"));
-        counsellingList.add(new Counselling(depressionId, "Depresión", "Hypercortisolemia and Depression", "https://journals.lww.com/psychosomaticmedicine/Abstract/2005/05001/Hypercortisolemia_and_Depression.7.aspx"));
-        counsellingList.add(new Counselling(depressionId, "Depresión", "Poststroke Depression: A Review", "https://journals.sagepub.com/doi/abs/10.1177/070674371005500602"));
-        counsellingList.add(new Counselling(depressionId, "Depresión", "The mechanism of depression", "https://psycnet.apa.org/record/1955-01239-001"));
+        counsellingList.add(new Counselling(bachilleratoId, "Acceso a bachillerato", "Periodismo, Psicología y Criminología: ¿qué Bachillerato estudiar?", "https://www.emagister.com/blog/periodismo-psicologia-criminologia-bachillerato-estudiar/"));
+        counsellingList.add(new Counselling(bachilleratoId, "Acceso a bachillerato", "Para estudiar psicología, ¿debo estudiar en ciencias o letras?", "https://www.mundopsicologos.com/consultas/para-estudiar-psicologia-debo-estudiar-en-ciencias-o-letras"));
+        counsellingList.add(new Counselling(bachilleratoId, "Acceso a bachillerato", "Orientación académica", "https://www.mundopsicologos.com/consultas/para-estudiar-psicologia-debo-estudiar-en-ciencias-o-letras"));
+        counsellingList.add(new Counselling(bachilleratoId, "Acceso a bachillerato", "¿Qué bachillerato se necesita para estudiar psicología?", "https://www.euroinnova.edu.es/blog/que-bachillerato-se-necesita-para-estudiar-psicologia#:~:text=Se%20debe%20tomar%20en%20cuenta,al%20grado%20de%20psicolog%C3%ADa%20educativa."));
+        counsellingList.add(new Counselling(bachilleratoId, "Acceso a bachillerato", "¿Qué estudiar para ser psicóloga?", "https://www.cesurformacion.com/blog/que-hay-que-estudiar-para-ser-psicologa"));
 
-        counsellingList.add(new Counselling(anxietyId, "Ansiedad", "Measures of Anxiety", "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879951/"));
-        counsellingList.add(new Counselling(anxietyId, "Ansiedad", "The development of anxiety", "https://psycnet.apa.org/buy/1998-04232-001"));
-        counsellingList.add(new Counselling(anxietyId, "Ansiedad", "The Psychology of Anxiety", "https://www.taylorfrancis.com/books/mono/10.4324/9781315673127/psychology-anxiety-eugene-levitt"));
+        counsellingList.add(new Counselling(accesoCarreraId, "Acceso a la carrera", "Acceso a psicología desde humanidades/ciencias sociales", "https://educaweb.com/consulta-orientacion/acceso-psicologia-bachillerato-humanidadesciencias-sociales-1153/"));
+        counsellingList.add(new Counselling(accesoCarreraId, "Acceso a la carrera", "Requisitos para acceder al grado de psicología", "https://www.unir.net/salud/revista/bachillerato-para-psicologia/"));
 
-        counsellingList.add(new Counselling(eatingDisorderId, "TCA", "CAUSES OF EATING DISORDERS", "http://www.gruberpeplab.com/teaching/psych3303_spring2019/documents/4.1_Polivy.Herman2002.pdf"));
-        counsellingList.add(new Counselling(eatingDisorderId, "TCA", "Risk factors for eating disorders.", "https://psycnet.apa.org/buy/2007-04834-005"));
-        counsellingList.add(new Counselling(eatingDisorderId, "TCA", "Outcome of Eating Disorders", "https://www.sciencedirect.com/science/article/abs/pii/S1056499308000631"));
+        counsellingList.add(new Counselling(fpId, "Ciclos de psicología", "Cursos FP Psicologia y Ciencias Sociales y de Comportamiento", "https://cursos.universia.es/Psicologia-y-Ciencias-Sociales-y-de-Comportamiento/5cp22/"));
+        counsellingList.add(new Counselling(fpId, "Ciclos de psicología", "Rama FP de Servicios SocioCulturales y a la Comunidad", "https://www.todofp.es/que-estudiar/loe/servicios-socioculturales-comunidad.html"));
+        counsellingList.add(new Counselling(fpId, "Ciclos de psicología", "Ciclos formativos de grado superior de psicologia sanitaria", "https://www.educaweb.com/ciclos-formativos-grado-superior-de/psicologia-sanitaria/"));
+        counsellingList.add(new Counselling(fpId, "Ciclos de psicología", "Curso de Psicología Infantil y Juvenil", "https://fpformacionprofesional.com/curso-de-psicologia-infantil-y-juvenil-art"));
+
+        counsellingList.add(new Counselling(gradoId, "Grados de psicología", "TITULACIÓN Grado en Psicología", "https://www.educaweb.com/estudio/titulacion-grado-psicologia/"));
+        counsellingList.add(new Counselling(gradoId, "Grados de psicología", "Grado en Psicología UAM", "https://www.uam.es/uam/psicologia"));
+        counsellingList.add(new Counselling(gradoId, "Grados de psicología", "Grado en Psicología UNED", "http://portal.uned.es/portal/page?_pageid=93,71396222&_dad=portal&_schema=PORTAL"));
+        counsellingList.add(new Counselling(gradoId, "Grados de psicología", "Grado en Psicología UNIOVI", "https://psicologia.uniovi.es/infoacademica/grados/-/asset_publisher/NR6k/content/grado-en-psicologia?redirect=%2Finfoacademica%2Fgrados"));
+
+
     }
 
     /**

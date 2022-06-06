@@ -43,22 +43,19 @@ public class NewsActivity extends AppCompatActivity {
     public void populateList() {
         newsList = new ArrayList<>();
 
-        int depressionId = R.drawable.depression;
-        int anxietyId = R.drawable.anxiety;
-        int eatingDisorderId = R.drawable.eating_disorder;
+        int newspaperId = R.drawable.news_newspaper;
+        int progressId = R.drawable.news_progress;
 
-        newsList.add(new News(depressionId, "Depresión", "Neurotrophins and depression", "https://www.sciencedirect.com/science/article/abs/pii/S0165614799013097"));
-        newsList.add(new News(depressionId, "Depresión", "Hypercortisolemia and Depression", "https://journals.lww.com/psychosomaticmedicine/Abstract/2005/05001/Hypercortisolemia_and_Depression.7.aspx"));
-        newsList.add(new News(depressionId, "Depresión", "Poststroke Depression: A Review", "https://journals.sagepub.com/doi/abs/10.1177/070674371005500602"));
-        newsList.add(new News(depressionId, "Depresión", "The mechanism of depression", "https://psycnet.apa.org/record/1955-01239-001"));
+        newsList.add(new News(newspaperId, "Periódico", "La alegría también necesita un entrenamiento", "https://www.abc.es/bienestar/psicologia-sexo/psicologia/abci-alegria-tambien-necesita-entrenamiento-202206060104_noticia.html"));
+        newsList.add(new News(newspaperId, "Periódico", "Cómo reconocer la timidez extrema y consejos para superarla", "https://www.mundodeportivo.com/vidae/psicologia-bienestar/20220606/1001816234/como-reconocer-timidez-extrema-consejos-superarla-isc.html"));
+        newsList.add(new News(newspaperId, "Periódico", "Controlar nervios para selectividad", "https://www.lasexta.com/bienestar/psicologia/como-controlar-nervios-aumentar-confianza-dias-evau-selectividad-pautas-psicologos_20220606629a35c71d1a9700019e2c75.html"));
+        newsList.add(new News(newspaperId, "Periódico", "Deborah Calvo, psicóloga clínico-forense", "https://www.elespanol.com/mujer/protagonistas/20220606/deborah-calvo-psicologa-clinico-forense-conozco-sinrazon-oscuro/677682242_0.html"));
 
-        newsList.add(new News(anxietyId, "Ansiedad", "Measures of Anxiety", "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879951/"));
-        newsList.add(new News(anxietyId, "Ansiedad", "The development of anxiety", "https://psycnet.apa.org/buy/1998-04232-001"));
-        newsList.add(new News(anxietyId, "Ansiedad", "The Psychology of Anxiety", "https://www.taylorfrancis.com/books/mono/10.4324/9781315673127/psychology-anxiety-eugene-levitt"));
+        newsList.add(new News(progressId, "Avances", "The Value of Positive Psychology", "https://academic.oup.com/abm/article/39/1/4/4569218?login=false"));
+        newsList.add(new News(progressId, "Avances", "Empirical Validation of Interventions.", "https://psycnet.apa.org/record/2005-08033-003"));
+        newsList.add(new News(progressId, "Avances", "Bowlby's secure base theory", "https://www.tandfonline.com/doi/abs/10.1080/14616730210154216?journalCode=rahd20"));
+        newsList.add(new News(progressId, "Avances", "The yin and yang of progress in social psychology", "https://psycnet.apa.org/record/1973-30203-001"));
 
-        newsList.add(new News(eatingDisorderId, "TCA", "CAUSES OF EATING DISORDERS", "http://www.gruberpeplab.com/teaching/psych3303_spring2019/documents/4.1_Polivy.Herman2002.pdf"));
-        newsList.add(new News(eatingDisorderId, "TCA", "Risk factors for eating disorders.", "https://psycnet.apa.org/buy/2007-04834-005"));
-        newsList.add(new News(eatingDisorderId, "TCA", "Outcome of Eating Disorders", "https://www.sciencedirect.com/science/article/abs/pii/S1056499308000631"));
     }
 
     /**

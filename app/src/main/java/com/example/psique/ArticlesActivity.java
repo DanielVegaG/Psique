@@ -43,9 +43,9 @@ public class ArticlesActivity extends AppCompatActivity {
     public void populateList() {
         articlesList = new ArrayList<>();
 
-        int depressionId = R.drawable.depression;
-        int anxietyId = R.drawable.anxiety;
-        int eatingDisorderId = R.drawable.eating_disorder;
+        int depressionId = R.drawable.home_depression;
+        int anxietyId = R.drawable.home_anxiety;
+        int eatingDisorderId = R.drawable.home_eating_disorder;
 
         articlesList.add(new Articles(depressionId, "Depresión", "Neurotrophins and depression", "https://www.sciencedirect.com/science/article/abs/pii/S0165614799013097"));
         articlesList.add(new Articles(depressionId, "Depresión", "Hypercortisolemia and Depression", "https://journals.lww.com/psychosomaticmedicine/Abstract/2005/05001/Hypercortisolemia_and_Depression.7.aspx"));

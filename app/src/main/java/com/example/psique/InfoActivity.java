@@ -43,22 +43,24 @@ public class InfoActivity extends AppCompatActivity {
     public void populateList() {
         infoList = new ArrayList<>();
 
-        int depressionId = R.drawable.depression;
-        int anxietyId = R.drawable.anxiety;
-        int eatingDisorderId = R.drawable.eating_disorder;
+        int depressionId = R.drawable.home_depression;
+        int anxietyId = R.drawable.home_anxiety;
+        int eatingDisorderId = R.drawable.home_eating_disorder;
 
-        infoList.add(new Info(depressionId, "Depresión", "Neurotrophins and depression", "https://www.sciencedirect.com/science/article/abs/pii/S0165614799013097"));
-        infoList.add(new Info(depressionId, "Depresión", "Hypercortisolemia and Depression", "https://journals.lww.com/psychosomaticmedicine/Abstract/2005/05001/Hypercortisolemia_and_Depression.7.aspx"));
-        infoList.add(new Info(depressionId, "Depresión", "Poststroke Depression: A Review", "https://journals.sagepub.com/doi/abs/10.1177/070674371005500602"));
-        infoList.add(new Info(depressionId, "Depresión", "The mechanism of depression", "https://psycnet.apa.org/record/1955-01239-001"));
+        infoList.add(new Info(depressionId, "Depresión", "Depresión: Causas, síntomas y tratamiento", "https://www.cun.es/enfermedades-tratamientos/enfermedades/depresion"));
+        infoList.add(new Info(depressionId, "Depresión", "Depresión clínica", "https://medlineplus.gov/spanish/ency/article/003213.htm"));
+        infoList.add(new Info(depressionId, "Depresión", "¿Qué Es La Depresión?", "https://www.mhanational.org/que-es-la-depresion"));
+        infoList.add(new Info(depressionId, "Depresión", "Información sobre la depresión", "https://www.nimh.nih.gov/health/publications/espanol/depresion-sp"));
 
-        infoList.add(new Info(anxietyId, "Ansiedad", "Measures of Anxiety", "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3879951/"));
-        infoList.add(new Info(anxietyId, "Ansiedad", "The development of anxiety", "https://psycnet.apa.org/buy/1998-04232-001"));
-        infoList.add(new Info(anxietyId, "Ansiedad", "The Psychology of Anxiety", "https://www.taylorfrancis.com/books/mono/10.4324/9781315673127/psychology-anxiety-eugene-levitt"));
+        infoList.add(new Info(anxietyId, "Ansiedad", "Ansiedad, MedlinePlus", "https://medlineplus.gov/spanish/anxiety.html#:~:text=La%20ansiedad%20es%20un%20sentimiento,una%20reacci%C3%B3n%20normal%20al%20estr%C3%A9s."));
+        infoList.add(new Info(anxietyId, "Ansiedad", "Cómo explicar la ansiedad", "https://www.metlife.es/blog/salud-bienestar/como-explicar-la-ansiedad/"));
+        infoList.add(new Info(anxietyId, "Ansiedad", "¿Qué es la ansiedad?", "https://www.sanamente.org/retos/que-es-la-ansiedad/"));
+        infoList.add(new Info(anxietyId, "Ansiedad", "La ansiedad es una emoción que nos prepara para luchar o huir", "https://psicoterapeutas.com/trastornos/ansiedad/"));
 
-        infoList.add(new Info(eatingDisorderId, "TCA", "CAUSES OF EATING DISORDERS", "http://www.gruberpeplab.com/teaching/psych3303_spring2019/documents/4.1_Polivy.Herman2002.pdf"));
-        infoList.add(new Info(eatingDisorderId, "TCA", "Risk factors for eating disorders.", "https://psycnet.apa.org/buy/2007-04834-005"));
-        infoList.add(new Info(eatingDisorderId, "TCA", "Outcome of Eating Disorders", "https://www.sciencedirect.com/science/article/abs/pii/S1056499308000631"));
+        infoList.add(new Info(eatingDisorderId, "TCA", "¿Qué son los Trastornos de la Conducta Alimentaria (TCA)?", "https://www.clinicbarcelona.org/asistencia/enfermedades/trastornos-de-la-conducta-alimentaria"));
+        infoList.add(new Info(eatingDisorderId, "TCA", "Transtornos alimentarios (TCA)", "https://www.programadesconecta.com/tratamientos/tca-trastornos-alimentarios/"));
+        infoList.add(new Info(eatingDisorderId, "TCA", "¿Se pueden evitar los TCA?", "https://www.acab.org/es/prevencion/se-pueden-evitar-los-tca/"));
+        infoList.add(new Info(eatingDisorderId, "TCA", "Transtorno por atracón", "https://itasaludmental.com/blog/link/85"));
     }
 
     /**

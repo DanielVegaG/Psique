@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
-            app:srcCompat="@drawable/depression" />
+            app:srcCompat="@drawable/home_depression" />
 
         <LinearLayout
             android:layout_width="283dp"

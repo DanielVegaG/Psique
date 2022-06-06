@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Psique">
         <activity
+            android:name=".BooksActivity"
+            android:exported="false" />
+        <activity
             android:name=".CounsellingActivity"
             android:exported="false" />
         <activity
