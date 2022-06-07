@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), HelpActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), InfoActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), ArticlesActivity.class));
+                getActivity().finish();
             }
         });
 
@@ -54,6 +57,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), NewsActivity.class));
+                getActivity().finish();
 
             }
         });
@@ -63,6 +67,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), CounsellingActivity.class));
+                getActivity().finish();
             }
         });
     }

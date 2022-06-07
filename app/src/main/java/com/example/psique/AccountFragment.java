@@ -53,6 +53,7 @@ public class AccountFragment extends Fragment {
                                 mAuth.signOut();
                                 Intent i = new Intent(getActivity(), MainActivity.class);
                                 getActivity().startActivity(i);
+                                getActivity().finish();
                             }
                         })
                         .setNegativeButton("No", null)

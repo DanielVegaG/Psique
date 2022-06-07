@@ -1,5 +1,6 @@
 package com.example.psique;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -59,9 +60,6 @@ public class LoginProfActivity extends AppCompatActivity {
         CometChat.init(this, Constants.API_ID, appSettings, new CometChat.CallbackListener<String>() {
             @Override
             public void onSuccess(String successMessage) {//si se hace correctamente
-                /*UIKitSettings.setAuthKey(Constants.AUTH_KEY);
-                CometChat.setSource("ui-kit","android","java");
-                Log.d("Login", "Initialization completed successfully");*/
             }
             @Override
             public void onError(CometChatException e) {//si hay un error
@@ -79,7 +77,8 @@ public class LoginProfActivity extends AppCompatActivity {
             CometChat.login(userId, Constants.AUTH_KEY, new CometChat.CallbackListener<User>() {
                 @Override
                 public void onSuccess(User user) {//si sale bien
-                    ListGroup.start(LoginProfActivity.this);//inicia la activity de los grupos
+                    Toast.makeText(LoginProfActivity.this, "Init login bien", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginProfActivity.this, MenuActivity.class));//abre el menú
                 }
 
                 @Override
@@ -88,6 +87,8 @@ public class LoginProfActivity extends AppCompatActivity {
                 }
             });
         } else {
+            Toast.makeText(this, "Abriendo sesión con el último usuario que inició sesión en este dispositivo...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginProfActivity.this, MenuActivity.class));//abre el menú
             // El usuario ya ha iniciado sesión
         }
     }
