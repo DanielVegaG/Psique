@@ -1,152 +1,99 @@
 package com.example.psique;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.viewpager2.widget.ViewPager2;
 
-import com.cometchat.pro.constants.CometChatConstants;
-import com.cometchat.pro.core.CometChat;
-import com.cometchat.pro.core.MessagesRequest;
-import com.cometchat.pro.exceptions.CometChatException;
-import com.cometchat.pro.models.BaseMessage;
-import com.cometchat.pro.models.CustomMessage;
-import com.cometchat.pro.models.MediaMessage;
-import com.cometchat.pro.models.TextMessage;
-import com.example.psique.models.MessageWrapper;
-import com.example.psique.utils.Constants;
-import com.squareup.picasso.Picasso;
-import com.stfalcon.chatkit.commons.ImageLoader;
-import com.stfalcon.chatkit.messages.MessageInput;
-import com.stfalcon.chatkit.messages.MessagesList;
-import com.stfalcon.chatkit.messages.MessagesListAdapter;
+import com.example.psique.Adapters.ChatPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
-import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ChatActivity extends AppCompatActivity {
 
     //atributos
-    private String groupId;
-    MessagesListAdapter<MessageWrapper> adapter;
+    @BindView(R.id.tabDots)
+    TabLayout tabLayout;
+    @BindView(R.id.viewPager)
+    ViewPager2 viewPager2;
 
-    /**
-     * Método para arrancar esta activity desde otra
-     * Se le pasa el contexto y el groupId
-     *
-     * @param context
-     * @param groupId
-     */
-    public static void start(Context context, String groupId) {
-        Intent starter = new Intent(context, ChatActivity.class);
-        starter.putExtra(Constants.GROUP_ID, groupId);
-        context.startActivity(starter);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        //inicializar atributos
-        Intent intent = getIntent();
-        if (intent != null) groupId = intent.getStringExtra(Constants.GROUP_ID);
-
-
-        initViews();
-        addListener();
-
-        fetchPreviousMessages();
+        init();
+        setupViewPager();
     }
 
-    private void fetchPreviousMessages() {
-        MessagesRequest messagesRequest = new MessagesRequest.MessagesRequestBuilder().setGUID(groupId).build();
-        messagesRequest.fetchPrevious(new CometChat.CallbackListener<List<BaseMessage>>() {
+    private void setupViewPager() {
+        viewPager2.setOffscreenPageLimit(2);
+        viewPager2.setAdapter(new ChatPagerAdapter(getSupportFragmentManager(), new Lifecycle() {
+            /**
+             * Adds a LifecycleObserver that will be notified when the LifecycleOwner changes
+             * state.
+             * <p>
+             * The given observer will be brought to the current state of the LifecycleOwner.
+             * For example, if the LifecycleOwner is in {@link State#STARTED} state, the given observer
+             * will receive {@link Event#ON_CREATE}, {@link Event#ON_START} events.
+             *
+             * @param observer The observer to notify.
+             */
             @Override
-            public void onSuccess(List<BaseMessage> baseMessages) {
-                addMessages(baseMessages);
+            public void addObserver(@NonNull LifecycleObserver observer) {
+
             }
 
+            /**
+             * Removes the given observer from the observers list.
+             * <p>
+             * If this method is called while a state change is being dispatched,
+             * <ul>
+             * <li>If the given observer has not yet received that event, it will not receive it.
+             * <li>If the given observer has more than 1 method that observes the currently dispatched
+             * event and at least one of them received the event, all of them will receive the event and
+             * the removal will happen afterwards.
+             * </ul>
+             *
+             * @param observer The observer to be removed.
+             */
             @Override
-            public void onError(CometChatException e) {
+            public void removeObserver(@NonNull LifecycleObserver observer) {
 
             }
-        });
+
+            /**
+             * Returns the current state of the Lifecycle.
+             *
+             * @return The current state of the Lifecycle.
+             */
+            @NonNull
+            @Override
+            public State getCurrentState() {
+                return null;
+            }
+        }));
+        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                if(position == 0){
+                    tab.setText("Chat");
+                }else{
+                    tab.setText("People");
+                }
+            }
+        }).attach();
     }
 
-    private void addMessages(List<BaseMessage> baseMessages) {
-        List<MessageWrapper> list = new ArrayList<>();
-        for (BaseMessage message : baseMessages) {
-            if (message instanceof TextMessage) {
-                list.add(new MessageWrapper((TextMessage) message));
-            }
-        }
-
-        adapter.addToEnd(list, true);
+    private void init(){
+        ButterKnife.bind(this);
     }
 
-    private void addListener() {
-        String listenerID = "listener 1";
-        CometChat.addMessageListener(listenerID, new CometChat.MessageListener() {
-            @Override
-            public void onTextMessageReceived(TextMessage textMessage) {
-                addMessage(textMessage);
-            }
-
-            @Override
-            public void onMediaMessageReceived(MediaMessage mediaMessage) {
-            }
-
-            @Override
-            public void onCustomMessageReceived(CustomMessage customMessage) {
-            }
-        });
-    }
-
-    private void initViews() {
-        MessageInput chatInput = findViewById(R.id.chatInput);
-        MessagesList messagesList = findViewById(R.id.messagesList);
-
-        chatInput.setInputListener(new MessageInput.InputListener() {
-            @Override
-            public boolean onSubmit(CharSequence input) {
-                sendMessage(input.toString());//envía el mensaje
-                return true;
-            }
-        });
-        String senderId = CometChat.getLoggedInUser().getUid();
-        ImageLoader imageLoader = new ImageLoader() {
-            @Override
-            public void loadImage(ImageView imageView, @Nullable String url, @Nullable Object payload) {
-                Picasso.get().load(url).into(imageView);
-            }
-        };
-        adapter = new MessagesListAdapter<>(senderId, imageLoader);
-        messagesList.setAdapter(adapter);
-
-    }
-
-    private void sendMessage(String message) {
-        TextMessage textMessage = new TextMessage(groupId, message, CometChatConstants.RECEIVER_TYPE_GROUP);
-
-        CometChat.sendMessage(textMessage, new CometChat.CallbackListener<TextMessage>() {
-            @Override
-            public void onSuccess(TextMessage textMessage) {
-                addMessage(textMessage);
-            }
-
-            @Override
-            public void onError(CometChatException e) {
-                Toast.makeText(ChatActivity.this, "Error al enviar mensaje", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void addMessage(TextMessage textMessage) {
-        adapter.addToStart(new MessageWrapper(textMessage), true);
-    }
 }

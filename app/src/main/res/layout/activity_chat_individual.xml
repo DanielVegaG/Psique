@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout_individualChatToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Psique.AppBarOverlay">
+
+        <Toolbar
+            android:id="@+id/tb_individualChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_purple"
+            android:titleTextColor="@color/white"
+            android:theme="@style/ToolbarColoredBackArrow"
+            android:popupTheme="@style/Theme.Psique.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_individualChatName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usuario 2"
+                    android:textSize="26sp"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"/>
+                <ImageView
+                    android:id="@+id/iv_individualChatAvatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+        </Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_individualChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/iv_individualChatPreview"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:layout_weight="10">
+
+            <ImageView
+                android:id="@+id/iv_individualChatCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_camera_alt_24"/>
+
+            <ImageView
+                android:id="@+id/iv_individualChatImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_image_24"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_individualChat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:hint="Escribe tu mensaje..."/>
+
+            <ImageView
+                android:id="@+id/iv_individualChatSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_send_24"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_individualChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBarLayout_individualChatToolbar"
+        android:layout_above="@id/ll_individualChat"
+        app:stackFromEnd="true"
+        android:layout_marginTop="4dp"
+        android:padding="8dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

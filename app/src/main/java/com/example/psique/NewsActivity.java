@@ -1,5 +1,6 @@
 package com.example.psique;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +52,7 @@ public class NewsActivity extends AppCompatActivity {
         b_exitNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(NewsActivity.this, MenuActivity.class));
                 finish();
             }
         });

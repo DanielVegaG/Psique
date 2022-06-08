@@ -14,7 +14,7 @@ import com.cometchat.pro.core.AppSettings;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.User;
-import com.example.psique.utils.Constants;
+import com.example.psique.Utils.Constants;
 
 
 public class LoginProfActivity extends AppCompatActivity {

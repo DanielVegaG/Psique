@@ -1,5 +1,6 @@
 package com.example.psique;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class ArticlesActivity extends AppCompatActivity {
         b_exitArticles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(ArticlesActivity.this, MenuActivity.class));
                 finish();
             }
         });

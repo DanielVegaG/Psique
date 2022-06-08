@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".RegisterUserActivity">
+    tools:context=".RegisterUserActivity"
+    android:theme="@style/Theme.MaterialComponents">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +44,8 @@
                         android:id="@+id/et_firstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nombre" />
+                        android:hint="Nombre"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +59,8 @@
                         android:id="@+id/et_lastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Apellidos" />
+                        android:hint="Apellidos"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -79,7 +82,8 @@
                         android:id="@+id/et_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Teléfono" />
+                        android:hint="Teléfono"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,7 +106,9 @@
                         android:id="@+id/et_birthdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Fecha de nacimiento" />
+                        android:hint="Fecha de nacimiento"
+                        android:textColorHint="#757575"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -127,7 +133,9 @@
                         android:id="@+id/et_bio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Biografía" />
+                        android:hint="Biografía"
+                        android:textColorHint="#757575"
+                        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,4 +1,4 @@
-package com.example.psique.models;
+package com.example.psique.Models;
 
 public class UserModel {
     //atributos

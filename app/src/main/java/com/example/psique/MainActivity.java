@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.psique.models.UserModel;
-import com.example.psique.utils.Constants;
+import com.example.psique.Models.UserModel;
+import com.example.psique.Utils.Constants;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +37,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private final static int LOGIN_REQUEST_CODE = 7171;
     //atributos
-    Button b_loginProf, b_loginUser;
     FirebaseDatabase database;
     DatabaseReference userRef;
     private List<AuthUI.IdpConfig> providers;
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//oculta la statusBar
-        setContentView(R.layout.activity_main);
+
 
         /**
          * Muestra el logo en pantalla completa al iniciar la app
@@ -74,29 +73,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Inicializar atributos
-        b_loginProf = findViewById(R.id.b_loginProf);
-        /**
-         * Abre la activity del login del profesional
-         */
-        b_loginProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginProfActivity.class));
-                finish();
-            }
-        });
 
-        b_loginUser = findViewById(R.id.b_loginUser);
-        /**
-         * Abre la activity del login de usuario
-         */
-        b_loginUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginUserActivity.class));
-                finish();
-            }
-        });
 
         init();
     }
