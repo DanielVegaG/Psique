@@ -1,14 +1,21 @@
 package com.example.psique;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +26,14 @@ import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.bumptech.glide.Glide;
 import com.example.psique.Listeners.IFirebaseLoadFailed;
 import com.example.psique.Listeners.ILoadTimeFromFirebaseListener;
 import com.example.psique.Models.ChatInfoModel;
 import com.example.psique.Models.ChatMessageModel;
 import com.example.psique.Utils.Constants;
+import com.example.psique.ViewHolders.ChatPictureHolder;
+import com.example.psique.ViewHolders.ChatPictureReceiveHolder;
 import com.example.psique.ViewHolders.ChatTextHolder;
 import com.example.psique.ViewHolders.ChatTextReceiveHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -39,7 +49,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,8 +99,31 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
     FirebaseRecyclerOptions<ChatMessageModel> options;
 
     Uri fileUri;
+    StorageReference storageReference;
 
     LinearLayoutManager layoutManager;
+
+    @OnClick(R.id.iv_individualChatImage)
+    void onSelectImageClick(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, MY_RESULT_LOAD_IMAGE);
+    }
+
+    @OnClick(R.id.iv_individualChatCamera)
+    void onCaptureImageClick(){
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE,"Nueva foto");
+        values.put(MediaStore.Images.Media.DESCRIPTION,"De tu galería");
+        fileUri = getContentResolver().insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                values
+        );
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        startActivityForResult(intent, MY_CAMERA_REQUEST_CODE);
+    }
+
 
     @OnClick(R.id.iv_individualChatSend)
     void onSubmitChatClick(){
@@ -96,7 +135,6 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
 
                 listener.onLoadOnlyTimeSuccess(estimulatedServerTimeinMs);
 
-
             }
 
             @Override
@@ -104,6 +142,46 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                 errorListener.onError(error.getMessage());
             }
         });
+    };
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == MY_CAMERA_REQUEST_CODE){
+            if(resultCode == RESULT_OK){
+                try{
+                    Bitmap thumbNail = MediaStore.Images.Media
+                            .getBitmap(
+                                    getContentResolver(),
+                                    fileUri
+                            );
+                    iv_individualChatPreview.setImageBitmap(thumbNail);
+                    iv_individualChatPreview.setVisibility(View.VISIBLE);
+                }catch (FileNotFoundException fnfe){
+                    Toast.makeText(this, "ERROR: "+fnfe.getMessage(), Toast.LENGTH_SHORT).show();
+                } catch (IOException ioe) {
+                    Toast.makeText(this, "ERROR: "+ioe.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }else if(requestCode == MY_RESULT_LOAD_IMAGE){
+                if(requestCode == RESULT_OK){
+                    try{
+                        final Uri imageUri = data.getData();
+                        InputStream inputStream = getContentResolver()
+                                .openInputStream(imageUri);
+                        Bitmap selectedImage = BitmapFactory.decodeStream(inputStream);
+                        iv_individualChatPreview.setImageBitmap(selectedImage);
+                        iv_individualChatPreview.setVisibility(View.VISIBLE);
+                        fileUri = imageUri;
+                    } catch (FileNotFoundException fnfe) {
+                        Toast.makeText(this, "ERROR: "+fnfe.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }else{
+                Toast.makeText(this, "Por favor, escoge una imagen", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -123,6 +201,8 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
     @Override
     protected void onResume() {
         super.onResume();
+        if(adapter != null)
+            adapter.startListening();
     }
 
     @Override
@@ -166,6 +246,26 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                             DateUtils.getRelativeTimeSpanString(chatMessageModel.getTimeStamp(),
                                             Calendar.getInstance().getTimeInMillis(),0)
                                     .toString());
+                }else if(viewHolder instanceof ChatPictureHolder){
+                    ChatPictureHolder chatPictureHolder = (ChatPictureHolder) viewHolder;
+                    chatPictureHolder.tv_ownMessagePictureText.setText(chatMessageModel.getContent());
+                    chatPictureHolder.tv_ownMessagePictureTime.setText(
+                            DateUtils.getRelativeTimeSpanString(chatMessageModel.getTimeStamp(),
+                                            Calendar.getInstance().getTimeInMillis(),0)
+                                    .toString());
+                    Glide.with(ChatIndividualActivity.this)
+                            .load(chatMessageModel.getPictureLink())
+                            .into(chatPictureHolder.iv_ownMessagePicturePreview);
+                }else if(viewHolder instanceof ChatPictureReceiveHolder){
+                    ChatPictureReceiveHolder chatPictureReceiveHolder = (ChatPictureReceiveHolder) viewHolder;
+                    chatPictureReceiveHolder.tv_friendMessagePictureText.setText(chatMessageModel.getContent());
+                    chatPictureReceiveHolder.tv_friendMessagePictureTime.setText(
+                            DateUtils.getRelativeTimeSpanString(chatMessageModel.getTimeStamp(),
+                                            Calendar.getInstance().getTimeInMillis(),0)
+                                    .toString());
+                    Glide.with(ChatIndividualActivity.this)
+                            .load(chatMessageModel.getPictureLink())
+                            .into(chatPictureReceiveHolder.iv_friendMessagePicturePreview);
                 }
 
             }
@@ -174,14 +274,22 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view;
-                if(viewType == 0){//mensaje propio
+                if(viewType == 0) {//mensaje de texto propio
                     view = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.layout_message_text_own, parent, false);
                     return new ChatTextReceiveHolder(view);
-                }else{ //if(viewType == 2){ //mensaje de la otra persona
+                }else if(viewType == 1){ //imagen propia
+                    view = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.layout_message_picture_friend, parent, false);
+                    return new ChatPictureReceiveHolder(view);
+                }else if(viewType == 2){ //mensaje de texto de la otra persona
                     view = LayoutInflater.from(parent.getContext())
                             .inflate(R.layout.layout_message_text_friend, parent, false);
                     return new ChatTextHolder(view);
+                }else{ //imagen de la otra persona
+                    view = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.layout_message_picture_own, parent, false);
+                    return new ChatPictureHolder(view);
                 }
 
             }
@@ -213,7 +321,7 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
         database = FirebaseDatabase.getInstance();
         chatRef = database.getReference(Constants.CHAT_REFERENCE);
 
-        offSetRef=database.getReference(".info/serverTimeOffSet");
+        offSetRef=database.getReference(".info/serverTimeOffset");
 
         Query query = chatRef.child(Constants.generateChatRoomId(
                 Constants.chatUser.getUid(),
@@ -259,9 +367,52 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
         chatMessageModel.setSenderId(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
 
-        //sólo el chat de texto
-        chatMessageModel.setPicture(false);
-        submitChatToFirebase(chatMessageModel, chatMessageModel.isPicture(), estimateTimeInMs);
+        if (fileUri == null){
+            chatMessageModel.setPicture(false);
+            submitChatToFirebase(chatMessageModel, chatMessageModel.isPicture(), estimateTimeInMs);
+        }else
+            uploadPicture(fileUri, chatMessageModel, estimateTimeInMs);
+
+    }
+
+    private void uploadPicture(Uri fileUri, ChatMessageModel chatMessageModel, long estimateTimeInMs) {
+        AlertDialog dialog = new AlertDialog.Builder(ChatIndividualActivity.this)
+                .setCancelable(false)
+                .setMessage("Por favor, espera...")
+                .create();
+        dialog.show();
+
+        String fileName = Constants.getFileName(getContentResolver(), fileUri);
+        String path = new StringBuilder(Constants.chatUser.getUid())
+                .append("/")
+                .append(fileName)
+                .toString();
+        storageReference = FirebaseStorage.getInstance()
+                .getReference()
+                .child(path);
+
+        UploadTask uploadTask = storageReference.putFile(fileUri);
+        //Crear task
+        Task<Uri> task = uploadTask.continueWithTask(task1 -> {
+            if(!task1.isSuccessful())
+                Toast.makeText(this, "Error al subir la foto", Toast.LENGTH_SHORT).show();
+            return storageReference.getDownloadUrl();
+        }).addOnCompleteListener(task12 -> {
+            if(task12.isSuccessful()){
+                String url = task12.getResult().toString();
+                dialog.dismiss();
+
+                chatMessageModel.setPicture(true);
+                chatMessageModel.setPictureLink(url);
+
+                submitChatToFirebase(chatMessageModel, chatMessageModel.isPicture(), estimateTimeInMs);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ChatIndividualActivity.this, "ERROR: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void submitChatToFirebase(ChatMessageModel chatMessageModel, boolean isPicture, long estimateTimeInMs) {
@@ -288,8 +439,10 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
         update_data.put("lastUpdate",estimateTimeInMs);
 
 
-        //sólo texto
-        update_data.put("lastMessage",chatMessageModel.getContent());
+        if(isPicture)
+            update_data.put("lastMessage","<Image>");//si es una imagen, introduce una imagen
+        else//si es texto, introduce texto
+            update_data.put("lastMessage",chatMessageModel.getContent());
 
 
         //actualizar
@@ -346,14 +499,17 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                                             et_individualChat.requestFocus();
                                                             if(adapter!=null)
                                                                 adapter.notifyDataSetChanged();
-                                                        }
 
+                                                            //limpiar la anterior thumbnail
+                                                            if(isPicture){
+                                                                fileUri = null;
+                                                                iv_individualChatPreview.setVisibility(View.GONE);
+                                                            }
+                                                        }
                                                     }
                                                 });
                                     }
                                 });
-
-
                     }
                 });
 
@@ -367,8 +523,10 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
         chatInfoModel.setCreateName(Constants.getName(Constants.currentUser));
 
 
-        //sólo texto
-        chatInfoModel.setLastMessage(chatMessageModel.getContent());
+        if(isPicture)
+            chatInfoModel.setLastMessage("<Image>");//si es una imagen, introduce una imagen
+        else
+            chatInfoModel.setLastMessage(chatMessageModel.getContent());//si es texto, texto
 
         chatInfoModel.setLastUpdate(estimateTimeInMs);
         chatInfoModel.setCreateDate(estimateTimeInMs);
@@ -428,6 +586,13 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                                             et_individualChat.requestFocus();
                                                             if(adapter!=null)
                                                                 adapter.notifyDataSetChanged();
+
+                                                            //limpiar la anterior thumbnail
+                                                            if(isPicture){
+                                                                fileUri = null;
+                                                                iv_individualChatPreview.setVisibility(View.GONE);
+                                                            }
+
                                                         }
 
                                                     }

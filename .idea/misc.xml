@@ -80,6 +80,9 @@
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/menu/menuchat.xml" value="0.42552083333333335" />
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/menu/navigation.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/menu/navigation_menu.xml" value="0.4466666666666667" />
+        <entry key="app/src/main/res/layout/activity_chat_individual.xml" value="0.23711340206185566" />
+        <entry key="app/src/main/res/layout/layout_message_picture_friend.xml" value="0.20117797851562502" />
+        <entry key="app/src/main/res/layout/layout_message_picture_own.xml" value="0.196875" />
       </map>
     </option>
   </component>

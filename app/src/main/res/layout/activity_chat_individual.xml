@@ -8,12 +8,12 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout_individualChatToolbar"
+        android:id="@+id/abl_individualChat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.Psique.AppBarOverlay">
 
-        <Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_individualChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
-        </Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -100,7 +100,7 @@
         android:id="@+id/rv_individualChat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/appBarLayout_individualChatToolbar"
+        android:layout_below="@id/abl_individualChat"
         android:layout_above="@id/ll_individualChat"
         app:stackFromEnd="true"
         android:layout_marginTop="4dp"
