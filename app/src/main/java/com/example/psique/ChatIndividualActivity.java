@@ -479,8 +479,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                     public void onSuccess(Void unused) {
 
                                         //añadir en la referencia del chat
-                                        chatRef.child(Constants.generateChatRoomId(Constants.chatUser.getUid(),
-                                                        FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                                        String roomId = Constants.generateChatRoomId(Constants.chatUser.getUid(),
+                                                FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        chatRef.child(roomId)
                                                 .child(Constants.CHAT_DETAIL_REFERENCE)
                                                 .push()
                                                 .setValue(chatMessageModel)
@@ -505,6 +506,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                                                 fileUri = null;
                                                                 iv_individualChatPreview.setVisibility(View.GONE);
                                                             }
+
+                                                            //enviar notificaciones
+                                                            sendNotificationToFriend(chatMessageModel, roomId);
                                                         }
                                                     }
                                                 });
@@ -512,6 +516,11 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                 });
                     }
                 });
+
+    }
+
+    private void sendNotificationToFriend(ChatMessageModel chatMessageModel, String roomId) {
+        Map<String, String> notiData = new HashMap<>();
 
     }
 
@@ -566,8 +575,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                     public void onSuccess(Void unused) {
 
                                         //añadir en la referencia del chat
-                                        chatRef.child(Constants.generateChatRoomId(Constants.chatUser.getUid(),
-                                                FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                                        String roomId = Constants.generateChatRoomId(Constants.chatUser.getUid(),
+                                                FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        chatRef.child(roomId)
                                                 .child(Constants.CHAT_DETAIL_REFERENCE)
                                                 .push()
                                                 .setValue(chatMessageModel)
@@ -592,6 +602,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                                                 fileUri = null;
                                                                 iv_individualChatPreview.setVisibility(View.GONE);
                                                             }
+
+                                                            //enviar notificaciones
+                                                            sendNotificationToFriend(chatMessageModel, roomId);
 
                                                         }
 
