@@ -3,6 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
 }
 //SHA-1: 97:67:6F:FB:54:17:C4:F6:AE:DE:C3:0C:1C:D9:85:7C:B0:F6:67:6D
+//ROOMID: nRCVcyP9C5QL8pbfqYf8cWQ66Ct16yvqAWzTUeTCf2wbQmSPH0Jg5ne2
 android {
     compileSdk 31
 
@@ -98,7 +99,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-    implementation "io.reactivex.rxjava2:rxjava:2.2.9"
+    implementation "io.reactivex.rxjava2:rxjava:2.2."
 
 
 

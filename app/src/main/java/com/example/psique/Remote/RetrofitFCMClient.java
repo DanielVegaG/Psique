@@ -5,7 +5,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitFCMClient {
-    //atributos
     private static Retrofit instance;
 
     public static Retrofit getInstance(){

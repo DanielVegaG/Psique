@@ -83,6 +83,7 @@
         <entry key="app/src/main/res/layout/activity_chat_individual.xml" value="0.23711340206185566" />
         <entry key="app/src/main/res/layout/layout_message_picture_friend.xml" value="0.20117797851562502" />
         <entry key="app/src/main/res/layout/layout_message_picture_own.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/layout_message_text_own.xml" value="0.8339350180505415" />
       </map>
     </option>
   </component>

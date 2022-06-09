@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -119,7 +121,20 @@ public class PeopleFragment extends Fragment {
                         public void onClick(View view) {
                             Constants.chatUser = userModel;
                             Constants.chatUser.setUid(adapter.getRef(position).getKey());
-                            startActivity(new Intent(getContext(), ChatIndividualActivity.class));
+
+                            String roomId = Constants.generateChatRoomId(FirebaseAuth
+                                            .getInstance().getCurrentUser().getUid(),
+                                    Constants.chatUser.getUid());
+                            Constants.roomSelected = roomId;
+
+                            Log.d("ROOMID",roomId);
+
+                            //Registrar topic
+                            FirebaseMessaging.getInstance()
+                                    .subscribeToTopic(roomId)
+                                    .addOnSuccessListener(aVoid -> {
+                                        startActivity(new Intent(getContext(), ChatIndividualActivity.class));
+                                    });
                         }
                     });
                 }else{//si la key es igual a la del usuario, la oculta

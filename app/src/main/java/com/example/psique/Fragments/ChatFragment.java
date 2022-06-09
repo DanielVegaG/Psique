@@ -1,22 +1,20 @@
 package com.example.psique.Fragments;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
@@ -34,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -103,14 +102,14 @@ public class ChatFragment extends Fragment {
             @Override
             public ChatInfoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_chat_item,parent, false);
+                        .inflate(R.layout.list_chat_item, parent, false);
 
                 return new ChatInfoHolder(itemView);
             }
 
             @Override
             protected void onBindViewHolder(@NonNull ChatInfoHolder chatInfoHolder, int position, @NonNull ChatInfoModel chatInfoModel) {
-                if(!adapter.getRef(position).getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                if (!adapter.getRef(position).getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     ColorGenerator generator = ColorGenerator.MATERIAL;
                     int color = generator.getColor(FirebaseAuth.getInstance().getCurrentUser().getUid());
                     TextDrawable.IBuilder builder = TextDrawable.builder()
@@ -122,7 +121,7 @@ public class ChatFragment extends Fragment {
                     String displayName = FirebaseAuth.getInstance().getCurrentUser().getUid()
                             .equals(chatInfoModel.getCreateId()) ? chatInfoModel.getFriendName() : chatInfoModel.getCreateName();
 
-                    TextDrawable drawable = builder.build(displayName.substring(0,1),color);
+                    TextDrawable drawable = builder.build(displayName.substring(0, 1), color);
                     chatInfoHolder.iv_chatAvatar.setImageDrawable(drawable);
 
                     chatInfoHolder.tv_chatName.setText(displayName);
@@ -144,26 +143,40 @@ public class ChatFragment extends Fragment {
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            if(snapshot.exists()){
+                                            if (snapshot.exists()) {
                                                 UserModel userModel = snapshot.getValue(UserModel.class);
                                                 Constants.chatUser = userModel;
                                                 Constants.chatUser.setUid(snapshot.getKey());
-                                                startActivity(new Intent(getContext(), ChatIndividualActivity.class));
+
+                                                String roomId = Constants.generateChatRoomId(FirebaseAuth
+                                                                .getInstance().getCurrentUser().getUid(),
+                                                        Constants.chatUser.getUid());
+                                                Constants.roomSelected = roomId;
+
+                                                Log.d("ROOMID",roomId);
+
+                                                //Registrar topic
+                                                FirebaseMessaging.getInstance()
+                                                        .subscribeToTopic(roomId)
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            startActivity(new Intent(getContext(), ChatIndividualActivity.class));
+                                                        });
+
                                             }
 
                                         }
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
-                                            Toast.makeText(getContext(), "ERROR: "+ error.getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "ERROR: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
                         }
                     });
-                }else{//si es la key del propio usuario, la oculta
+                } else {//si es la key del propio usuario, la oculta
                     chatInfoHolder.itemView.setVisibility(View.GONE);
-                    chatInfoHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
+                    chatInfoHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
                 }
             }
         };
@@ -173,7 +186,7 @@ public class ChatFragment extends Fragment {
     }
 
     private void initView(View itemView) {
-        unbinder = ButterKnife.bind(this,itemView);
+        unbinder = ButterKnife.bind(this, itemView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rv_chat.setLayoutManager(layoutManager);
         rv_chat.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
@@ -190,12 +203,12 @@ public class ChatFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if(adapter != null) adapter.startListening();
+        if (adapter != null) adapter.startListening();
     }
 
     @Override
     public void onStop() {
-        if(adapter != null) adapter.stopListening();
+        if (adapter != null) adapter.stopListening();
         super.onStop();
     }
 
