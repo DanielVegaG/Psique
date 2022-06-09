@@ -332,7 +332,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                 .setQuery(query,ChatMessageModel.class).build();
         ButterKnife.bind(this);
         layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_individualChat.setLayoutManager(layoutManager);
+        rv_individualChat.setAdapter(adapter);
 
 
         ColorGenerator generator = ColorGenerator.MATERIAL;
