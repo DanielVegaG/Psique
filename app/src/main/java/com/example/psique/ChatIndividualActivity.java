@@ -357,6 +357,7 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_individualChat.setLayoutManager(layoutManager);
+        rv_individualChat.setAdapter(adapter);
 
         ColorGenerator generator = ColorGenerator.MATERIAL;
         int color = generator.getColor(Constants.chatUser.getUid());
