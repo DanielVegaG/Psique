@@ -126,9 +126,8 @@ public class Constants {
             builder.setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
-
-        /*if (!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(sender) &&
-                !Constants.roomSelected.equals(roomId))*/
-            notificationManager.notify(id,notification);
+        
+        if (!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(sender) &&
+                !Constants.roomSelected.equals(roomId))
     }
 }

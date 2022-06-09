@@ -31,6 +31,10 @@ import com.example.psique.Listeners.IFirebaseLoadFailed;
 import com.example.psique.Listeners.ILoadTimeFromFirebaseListener;
 import com.example.psique.Models.ChatInfoModel;
 import com.example.psique.Models.ChatMessageModel;
+import com.example.psique.Models.FCMResponse;
+import com.example.psique.Models.FCMSendData;
+import com.example.psique.Remote.IFCMService;
+import com.example.psique.Remote.RetrofitFCMClient;
 import com.example.psique.Utils.Constants;
 import com.example.psique.ViewHolders.ChatPictureHolder;
 import com.example.psique.ViewHolders.ChatPictureReceiveHolder;
@@ -63,6 +67,10 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class ChatIndividualActivity extends AppCompatActivity implements ILoadTimeFromFirebaseListener, IFirebaseLoadFailed {
 
@@ -102,6 +110,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
     StorageReference storageReference;
 
     LinearLayoutManager layoutManager;
+
+    IFCMService ifcmService;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @OnClick(R.id.iv_individualChatImage)
     void onSelectImageClick(){
@@ -214,6 +225,13 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
         loadChatContent();
     }
 
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        Constants.roomSelected = "";
+        super.onDestroy();
+    }
+
     private void loadChatContent() {
         String receiverId = FirebaseAuth.getInstance()
                 .getCurrentUser().getUid();
@@ -313,9 +331,14 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                 }
             }
         });
+        rv_individualChat.setAdapter(adapter);
     }
 
+
     private void initViews() {
+
+        ifcmService = RetrofitFCMClient.getInstance().create(IFCMService.class);
+
         listener = this;
         errorListener = this;
         database = FirebaseDatabase.getInstance();
@@ -335,7 +358,6 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_individualChat.setLayoutManager(layoutManager);
         rv_individualChat.setAdapter(adapter);
-
 
         ColorGenerator generator = ColorGenerator.MATERIAL;
         int color = generator.getColor(Constants.chatUser.getUid());
@@ -481,8 +503,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                     public void onSuccess(Void unused) {
 
                                         //añadir en la referencia del chat
-                                        chatRef.child(Constants.generateChatRoomId(Constants.chatUser.getUid(),
-                                                        FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                                        String roomId=Constants.generateChatRoomId(Constants.chatUser.getUid(),
+                                                FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        chatRef.child(roomId)
                                                 .child(Constants.CHAT_DETAIL_REFERENCE)
                                                 .push()
                                                 .setValue(chatMessageModel)
@@ -507,6 +530,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                                                 fileUri = null;
                                                                 iv_individualChatPreview.setVisibility(View.GONE);
                                                             }
+
+                                                            //enviar notificaciones
+                                                            sendNotificationToFriend(chatMessageModel, roomId);
                                                         }
                                                     }
                                                 });
@@ -514,6 +540,34 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                 });
                     }
                 });
+
+    }
+
+    private void sendNotificationToFriend(ChatMessageModel chatMessageModel, String roomId) {
+        Map<String, String> notiData = new HashMap<>();
+        notiData.put(Constants.NOTIF_TITLE, "Message from "+chatMessageModel.getName());
+        notiData.put(Constants.NOTIF_CONTENT, chatMessageModel.getContent());
+        notiData.put(Constants.NOTIF_SENDER, FirebaseAuth.getInstance().getCurrentUser().getUid());
+        notiData.put(Constants.NOTIF_ROOM_ID, roomId);
+
+        FCMSendData sendData = new FCMSendData("/topics/"+roomId, notiData);
+
+        compositeDisposable.add(
+                ifcmService.sendNotification(sendData)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<FCMResponse>() {
+                            @Override
+                            public void accept(FCMResponse fcmResponse) throws Exception {
+
+                            }
+                        }, new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Exception {
+                                Toast.makeText(ChatIndividualActivity.this, ""+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+        );
 
     }
 
@@ -568,8 +622,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                     public void onSuccess(Void unused) {
 
                                         //añadir en la referencia del chat
-                                        chatRef.child(Constants.generateChatRoomId(Constants.chatUser.getUid(),
-                                                FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                                        String roomId=Constants.generateChatRoomId(Constants.chatUser.getUid(),
+                                                FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        chatRef.child(roomId)
                                                 .child(Constants.CHAT_DETAIL_REFERENCE)
                                                 .push()
                                                 .setValue(chatMessageModel)
@@ -594,6 +649,9 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                                                                 fileUri = null;
                                                                 iv_individualChatPreview.setVisibility(View.GONE);
                                                             }
+
+                                                            //enviar notificaciones
+                                                            sendNotificationToFriend(chatMessageModel, roomId);
 
                                                         }
 
