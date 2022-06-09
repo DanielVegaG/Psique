@@ -56,6 +56,7 @@
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/layout/help_list.xml" value="0.23177083333333334" />
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/layout/layout_group.xml" value="0.2609375" />
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/layout/layout_message_friend.xml" value="0.221875" />
+        <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/layout/layout_message_picture_own.xml" value="0.42552083333333335" />
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/layout/list_articles.xml" value="0.26458333333333334" />
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/layout/list_chat_item.xml" value="0.42552083333333335" />
         <entry key="..\:/Users/Dani/Desktop/Programas/Clase/2DAM/Psique/app/src/main/res/layout/list_counselling.xml" value="0.26458333333333334" />
@@ -83,7 +84,6 @@
         <entry key="app/src/main/res/layout/activity_chat_individual.xml" value="0.23711340206185566" />
         <entry key="app/src/main/res/layout/layout_message_picture_friend.xml" value="0.20117797851562502" />
         <entry key="app/src/main/res/layout/layout_message_picture_own.xml" value="0.196875" />
-        <entry key="app/src/main/res/layout/layout_message_text_own.xml" value="0.8339350180505415" />
       </map>
     </option>
   </component>

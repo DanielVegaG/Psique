@@ -14,6 +14,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.OpenableColumns;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -45,6 +47,7 @@ public class Constants {
 
 
     public static String generateChatRoomId(String string1, String string2) {
+        Log.d("Constants", "STRINGS: "+string1+" "+string2);
         if (string1.compareTo(string2) > 0)
             return new StringBuilder(string1).append(string2).toString();
         else if(string1.compareTo(string2) < 0)
@@ -82,6 +85,7 @@ public class Constants {
             if(cut != -1)
                 result =  result.substring(cut+1);
         }
+        Log.d("Constants", "RESULT: "+result);
 
         return result;
     }
@@ -129,5 +133,7 @@ public class Constants {
         
         if (!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(sender) &&
                 !Constants.roomSelected.equals(roomId))
+            notificationManager.notify(id,notification);
+
     }
 }

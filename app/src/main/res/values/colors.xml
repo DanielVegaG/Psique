@@ -10,5 +10,5 @@
     <color name="back_splash">#2E2E2E</color>
     <color name="light_purple">#E368DF</color>
     <color name="list_chat_color">#FFF</color>
-    <color name="chat_bg">#F00</color>
+    <color name="chat_bg">#FFF</color>
 </resources>

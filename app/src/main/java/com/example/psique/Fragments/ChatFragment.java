@@ -102,7 +102,7 @@ public class ChatFragment extends Fragment {
             @Override
             public ChatInfoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_chat_item, parent, false);
+                        .inflate(R.layout.layout_chat_item, parent, false);
 
                 return new ChatInfoHolder(itemView);
             }

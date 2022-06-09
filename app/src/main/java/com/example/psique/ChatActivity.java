@@ -97,9 +97,9 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if(position == 0){
-                    tab.setText("Chat");
+                    tab.setText("Tus chats");
                 }else{
-                    tab.setText("People");
+                    tab.setText("Usuarios");
                 }
             }
         }).attach();
