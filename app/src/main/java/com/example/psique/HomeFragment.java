@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 public class HomeFragment extends Fragment {
 
     //atributos
-    Button b_help, b_info, b_articles, b_news, b_counselling;
+    Button b_help, b_info, b_articles, b_news, b_counselling, b_books;
 
     @Nullable
     @Override
@@ -67,6 +67,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), CounsellingActivity.class));
+                getActivity().finish();
+            }
+        });
+
+        b_books = getView().findViewById(R.id.b_books);
+        b_books.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), BooksActivity.class));
                 getActivity().finish();
             }
         });

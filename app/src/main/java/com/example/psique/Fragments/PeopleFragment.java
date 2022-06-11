@@ -48,6 +48,10 @@ public class PeopleFragment extends Fragment {
     private PeopleViewModel mViewModel;
     static PeopleFragment instance;
 
+    /**
+     * Si la instancia de PeopleFragment está a null, crea una nueva
+     * @return la instancia del PeopleFragment
+     */
     public static PeopleFragment getInstance() {
         return instance == null ? new PeopleFragment() : instance;
     }
@@ -56,8 +60,8 @@ public class PeopleFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View itemView = inflater.inflate(R.layout.fragment_people, container, false);
-        initView(itemView);
-        loadPeople();
+        initView(itemView);//inicializar los atributos
+        loadPeople();//cargar en la pestaña de Usuarios todas las personas con cuenta en la app
         return itemView;
     }
 
@@ -98,8 +102,18 @@ public class PeopleFragment extends Fragment {
                 return new UserViewHolder(view);
             }
 
+            /**
+             * El chat está vacío, pone en la pestaña de usuarios el nombre de todas las personas
+             * que tienen una cuenta creada
+             * @param userViewHolder
+             * @param position
+             * @param userModel
+             */
             @Override
             protected void onBindViewHolder(@NonNull UserViewHolder userViewHolder, int position, @NonNull UserModel userModel) {
+                /*
+                Si se hace click en un chat que no sea el propio
+                 */
                 if(!adapter.getRef(position).getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                     ColorGenerator generator = ColorGenerator.MATERIAL;
                     int color = generator.getColor(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -107,33 +121,33 @@ public class PeopleFragment extends Fragment {
                             .beginConfig()
                             .withBorder(4)
                             .endConfig()
-                            .round();
-                    TextDrawable drawable = builder.build(userModel.getFirstName().substring(0,1),color);
-                    userViewHolder.iv_peopleAvatar.setImageDrawable(drawable);
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append(userModel.getFirstName()).append(" ").append(userModel.getLastName());
-                    userViewHolder.tv_peopleName.setText(stringBuilder.toString());
-                    userViewHolder.tv_peopleBio.setText(userModel.getBio());
+                            .round();//icono del amigo
 
-                    //evento
+                    TextDrawable drawable = builder.build(userModel.getFirstName().substring(0,1),color);
+                    userViewHolder.iv_peopleAvatar.setImageDrawable(drawable);//aquí se le pasa al usuario
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append(userModel.getFirstName()).append(" ").append(userModel.getLastName());//nombre de usuario
+                    userViewHolder.tv_peopleName.setText(stringBuilder.toString());//nombre de usuario que aparece en la lista de usuarios
+                    userViewHolder.tv_peopleBio.setText(userModel.getBio());//biografía que aparece debajo de cada nombre de usuario
+
+                    //evento si se hace click en el chat
                     userViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Constants.chatUser = userModel;
                             Constants.chatUser.setUid(adapter.getRef(position).getKey());
 
+                            Log.d("STRINGS", FirebaseAuth.getInstance().getCurrentUser()+"");
                             String roomId = Constants.generateChatRoomId(FirebaseAuth
                                             .getInstance().getCurrentUser().getUid(),
                                     Constants.chatUser.getUid());
-                            Constants.roomSelected = roomId;
-
-                            Log.d("ROOMID",roomId);
+                            Constants.roomSelected = roomId;//id del chat
 
                             //Registrar topic
                             FirebaseMessaging.getInstance()
                                     .subscribeToTopic(roomId)
                                     .addOnSuccessListener(aVoid -> {
-                                        startActivity(new Intent(getContext(), ChatIndividualActivity.class));
+                                        startActivity(new Intent(getContext(), ChatIndividualActivity.class));//abre el chat con la otra persona
                                     });
                         }
                     });
@@ -149,6 +163,10 @@ public class PeopleFragment extends Fragment {
         rv_people.setAdapter(adapter);
     }
 
+    /**
+     * da valores al recyclerView y al linear layout
+     * @param itemView
+     */
     private void initView(View itemView) {
         unbinder = ButterKnife.bind(this,itemView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

@@ -9,6 +9,9 @@ import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
+/**
+ * Interfaz para enviar la notifiación
+ */
 public interface IFCMService {
     @Headers({
             "Content-Type:application/json",

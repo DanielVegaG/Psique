@@ -1,6 +1,5 @@
 package com.example.psique.Utils;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,47 +14,55 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.OpenableColumns;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.psique.Models.UserModel;
 import com.example.psique.R;
-import com.example.psique.Services.MyFCMService;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Random;
 
+/**
+ * En esta clase se definen constantes o métodos comunes
+ * que serán usadas en distintas clases
+ */
 public class Constants {
-    public static final String API_ID = "21138022f3497590";
-    public static final String REGION = "eu";
-    public static final String AUTH_KEY = "a28bd659c03a35cf19efdc5df09b36bb37386ea5";
-    public static final String GROUP_ID = "group_id";
+    public static final String USER_REFERENCES = "People";//referencia a la clase People de la base de datos (Usuarios)
+    public static final String CHAT_REFERENCE = "Chat";//referencia a la clase Chat de la base de datos
+    public static final String CHAT_LIST_REFERENCE = "ChatList";//referencia a ChatList de la base de datos (lista de chats)
+    public static final String CHAT_DETAIL_REFERENCE = "Detail";//detalles del mensaje, objeto de la base de datos
 
+    public static final String NOTIF_TITLE = "Title";//título de la notificación
+    public static final String NOTIF_CONTENT = "Content";//contenido de la notificaión
+    public static final String NOTIF_SENDER = "Sender";//persona que la envía
+    public static final String NOTIF_ROOM_ID = "Room id";//id del chat al qu se envía
+    public static String roomSelected = "";//si hay un chat seleccionado
 
-    public static final String USER_REFERENCES = "People";
-    public static final String CHAT_REFERENCE = "Chat";
-    public static final String CHAT_LIST_REFERENCE = "ChatList";
-    public static final String CHAT_DETAIL_REFERENCE = "Detail";
-    public static final String NOTIF_TITLE = "Title";
-    public static final String NOTIF_CONTENT = "Content";
-    public static final String NOTIF_SENDER = "Sender";
-    public static final String NOTIF_ROOM_ID = "Room id";
-    public static String roomSelected = "";
-    public static UserModel currentUser = new UserModel();
-    public static UserModel chatUser = new UserModel();
+    public static UserModel currentUser = new UserModel();//usuario actual
+    public static UserModel chatUser = new UserModel();//usuario del chat
 
-
+    /**
+     * Método que genera un id al chat
+     * @param string1
+     * @param string2
+     * @return
+     */
     public static String generateChatRoomId(String string1, String string2) {
-        Log.d("Constants", "STRINGS: "+string1+" "+string2);
-        if (string1.compareTo(string2) > 0)
+        Log.d("STRINGS", string1+" "+string2);
+        if (string1.compareTo(string2) > 0)//si la primera cadena es léxicamente mayor crea el id poniendo a éste primero
             return new StringBuilder(string1).append(string2).toString();
-        else if(string1.compareTo(string2) < 0)
+        else if(string1.compareTo(string2) < 0)//si la primera cadena es léxicamente menor, lo hace poniendo primero a la segunda
             return new StringBuilder(string2).append(string1).toString();
-        else return new StringBuilder("Error_Chat_Contigo_mismo")
+        else return new StringBuilder("Error_Chat_Contigo_mismo")//si son iguales las cadenas, da error
                     .append(new Random().nextInt()).toString();
     }
 
+    /**
+     * obtiene el nombre del usuario (nombre apellidos)
+     * @param chatUser
+     * @return
+     */
     public static String getName(UserModel chatUser) {
         return new StringBuilder(chatUser.getFirstName())
                 .append(" ")
@@ -64,28 +71,35 @@ public class Constants {
                 .toString();
     }
 
+    /**
+     * Obtiene el nombre de la imagen que se mande
+     * @param contentResolver
+     * @param fileUri
+     * @return
+     */
     public static String getFileName(ContentResolver contentResolver, Uri fileUri) {
         String result= null;
 
+        //si la uri tiene contenido, el cursor recorre la base de datos
         if(fileUri.getScheme().equals("content")){
             Cursor cursor = contentResolver.query(fileUri, null, null, null);
             try {
                 if(cursor != null && cursor.moveToFirst())
                     result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
             }finally {{
-                cursor.close();
+                cursor.close();//después cierra la base de datos
             }
 
             }
         }
 
+        //si no encuentra nada
         if(result == null){
             result = fileUri.getPath();
             int cut = result.lastIndexOf("/");
             if(cut != -1)
                 result =  result.substring(cut+1);
         }
-        Log.d("Constants", "RESULT: "+result);
 
         return result;
     }

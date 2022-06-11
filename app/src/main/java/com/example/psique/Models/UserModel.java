@@ -1,15 +1,17 @@
 package com.example.psique.Models;
 
+/**
+ * Esta clase contiene los datos de los usuarios
+ */
 public class UserModel {
     //atributos
     private String uid, firstName, lastName, phone, bio;
     private double birthDate;
-    private boolean gender;
+    private boolean professional;
 
     //constructor
     public UserModel() {
-        birthDate = System.currentTimeMillis();
-        gender = true;
+
     }
 
     //getters y setters
@@ -62,11 +64,11 @@ public class UserModel {
         this.birthDate = birthDate;
     }
 
-    public boolean isGender() {
-        return gender;
+    public boolean isProfessional() {
+        return professional;
     }
 
-    public void setGender(boolean gender) {
-        this.gender = gender;
+    public void setProfessional(boolean professional) {
+        this.professional = professional;
     }
 }

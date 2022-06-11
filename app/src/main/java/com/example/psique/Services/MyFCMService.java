@@ -10,6 +10,9 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Cuerpo de la notificación al recibirla
+ */
 public class MyFCMService extends FirebaseMessagingService {
 
     @Override

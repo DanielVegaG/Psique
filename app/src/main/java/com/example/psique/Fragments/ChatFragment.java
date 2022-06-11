@@ -44,8 +44,8 @@ import butterknife.Unbinder;
 public class ChatFragment extends Fragment {
 
     //atributos
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-    FirebaseRecyclerAdapter adapter;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");//para dar fomato a las fechas
+    FirebaseRecyclerAdapter adapter;//adaptador
 
     @BindView(R.id.rv_chat)
     RecyclerView rv_chat;
@@ -54,6 +54,10 @@ public class ChatFragment extends Fragment {
 
     static ChatFragment instance;
 
+    /**
+     * Si la instancia de ChatFragment está a null, crea una nueva
+     * @return la instancia del ChatFragment
+     */
     public static ChatFragment getInstance() {
         return instance == null ? new ChatFragment() : instance;
     }
@@ -62,11 +66,14 @@ public class ChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View itemView = inflater.inflate(R.layout.fragment_chat, container, false);
-        initView(itemView);
-        loadChatList();
-        return itemView;
+        initView(itemView);//inicializa las vistas
+        loadChatList();//carga el chat
+        return itemView;//la vista
     }
 
+    /**
+     * Carga el chat
+     */
     private void loadChatList() {
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
@@ -107,8 +114,17 @@ public class ChatFragment extends Fragment {
                 return new ChatInfoHolder(itemView);
             }
 
+            /**
+             * Mete toda la información en los chats, incluídos los datos de los usuarios
+             * @param chatInfoHolder
+             * @param position
+             * @param chatInfoModel
+             */
             @Override
             protected void onBindViewHolder(@NonNull ChatInfoHolder chatInfoHolder, int position, @NonNull ChatInfoModel chatInfoModel) {
+                /*
+                Si se hace click en un chat que no sea el propio
+                 */
                 if (!adapter.getRef(position).getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     ColorGenerator generator = ColorGenerator.MATERIAL;
                     int color = generator.getColor(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -116,11 +132,13 @@ public class ChatFragment extends Fragment {
                             .beginConfig()
                             .withBorder(4)
                             .endConfig()
-                            .round();
+                            .round();//crear icono de usuario
 
+                    //Nombre swl usuario
                     String displayName = FirebaseAuth.getInstance().getCurrentUser().getUid()
                             .equals(chatInfoModel.getCreateId()) ? chatInfoModel.getFriendName() : chatInfoModel.getCreateName();
 
+                    //meter la imagen creada en el iconod el usuario
                     TextDrawable drawable = builder.build(displayName.substring(0, 1), color);
                     chatInfoHolder.iv_chatAvatar.setImageDrawable(drawable);
 
@@ -185,6 +203,10 @@ public class ChatFragment extends Fragment {
         rv_chat.setAdapter(adapter);
     }
 
+    /**
+     * Incializa los atributos
+     * @param itemView
+     */
     private void initView(View itemView) {
         unbinder = ButterKnife.bind(this, itemView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -196,7 +218,6 @@ public class ChatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 

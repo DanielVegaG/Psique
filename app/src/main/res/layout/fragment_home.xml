@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,18 +9,22 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView3"
         android:name="com.example.psique.fragment_logo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
         tools:layout="@layout/fragment_logo" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_below="@+id/fragmentContainerView3"
+        android:layout_marginTop="9dp"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical">
 
@@ -31,8 +35,8 @@
                 android:layout_margin="30dp"
                 android:background="@drawable/rounded_button"
                 android:paddingTop="10dp"
-                android:text="Ayudas temporales"
-                android:paddingBottom="10dp"/>
+                android:paddingBottom="10dp"
+                android:text="Ayudas temporales" />
 
             <Button
                 android:id="@+id/b_info"
@@ -40,7 +44,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="30dp"
                 android:background="@drawable/rounded_button"
-                android:text="Información pseudocientífica" />
+                android:text="Información para todos" />
 
             <Button
                 android:id="@+id/b_articles"
@@ -48,7 +52,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="30dp"
                 android:background="@drawable/rounded_button"
-                android:text="Artículos científicos" />
+                android:text="Ampliación de conocimientos" />
 
             <Button
                 android:id="@+id/b_news"
@@ -65,7 +69,15 @@
                 android:layout_margin="30dp"
                 android:background="@drawable/rounded_button"
                 android:text="Orientación" />
+
+            <Button
+                android:id="@+id/b_books"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="30dp"
+                android:background="@drawable/rounded_button"
+                android:text="Libros" />
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

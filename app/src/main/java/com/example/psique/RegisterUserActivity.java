@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     TextInputEditText et_phone;
     @BindView(R.id.et_birthdate)
     TextInputEditText et_birthdate;
+    @BindView(R.id.cb_professional)
+    CheckBox cb_professional;
     @BindView(R.id.et_bio)
     TextInputEditText et_bio;
     @BindView(R.id.b_register)
@@ -79,15 +82,22 @@ public class RegisterUserActivity extends AppCompatActivity {
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isSelectBirthdate) {
-                    Toast.makeText(RegisterUserActivity.this, "Por favor, introduce tu fecha de nacimiento", Toast.LENGTH_LONG).show();
+                if (!isSelectBirthdate || et_firstName.getText().toString().equals("")) {
+                    Toast.makeText(RegisterUserActivity.this, "Por favor, es obligatorio que rellene el nombre y la fecha de nacimiento", Toast.LENGTH_LONG).show();
                     return;
                 }
                 UserModel userModel = new UserModel();
-                userModel.setFirstName(et_firstName.getText().toString());
+
                 userModel.setLastName(et_lastName.getText().toString());
                 userModel.setPhone(et_phone.getText().toString());
                 userModel.setBirthDate(calendar.getTimeInMillis());
+                userModel.setProfessional(cb_professional.isChecked());
+
+                if (cb_professional.isChecked())
+                    userModel.setFirstName("Dr/a. "+et_firstName.getText().toString());
+                else
+                    userModel.setFirstName(et_firstName.getText().toString());
+
                 userModel.setBio(et_bio.getText().toString());
                 userModel.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
 

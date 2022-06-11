@@ -1,5 +1,8 @@
 package com.example.psique.Models;
 
+/**
+ * esta clase contiene el texto del mensaje dentro del chat
+ */
 public class ChatMessageModel {
 
     //atributos
