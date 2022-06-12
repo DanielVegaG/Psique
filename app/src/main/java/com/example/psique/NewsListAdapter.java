@@ -26,7 +26,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 
 
     /**
-     * Constructor para dar valores iniciales a
+     * Constructor para dar valores iniciales
      *
      * @param itemList, lista de News
      * @param context

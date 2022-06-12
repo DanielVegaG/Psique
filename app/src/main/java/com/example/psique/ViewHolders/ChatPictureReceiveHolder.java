@@ -13,6 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * Esta es la clase para los mensajes recibidos que tienen el formato foto
+ */
 public class ChatPictureReceiveHolder extends RecyclerView.ViewHolder {
     //atributos
     @BindView(R.id.tv_friendMessagePictureTime)
@@ -24,6 +27,7 @@ public class ChatPictureReceiveHolder extends RecyclerView.ViewHolder {
 
     private Unbinder unbinder;
 
+    //une los atributos a su valor
     public ChatPictureReceiveHolder(@NonNull View itemView) {
         super(itemView);
         unbinder = ButterKnife.bind(this, itemView);

@@ -19,14 +19,14 @@ import java.util.List;
 public class ArticlesListAdapter extends RecyclerView.Adapter<ArticlesListAdapter.ArticlesViewHolder> {
 
     //atributos
-    //lista de Articles
+        //lista de Articles
     private List<Articles> links;
     private final LayoutInflater layoutInflater;
     private final Context context;
 
 
     /**
-     * Constructor para dar valores iniciales a
+     * Constructor para dar valores iniciales a los atributos
      *
      * @param itemList, lista de Articles
      * @param context

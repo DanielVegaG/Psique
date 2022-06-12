@@ -24,7 +24,7 @@ public class ArticlesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_articles);
 
         /**
-         * Salir de la pantalla de ayudas
+         * Salir de la pantalla de artículos
          */
         b_exitArticles = findViewById(R.id.b_exitArticles);
         b_exitArticles.setOnClickListener(new View.OnClickListener() {

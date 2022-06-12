@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.example.psique.ChatActivity;
 import com.example.psique.ChatIndividualActivity;
 import com.example.psique.Models.UserModel;
 import com.example.psique.R;

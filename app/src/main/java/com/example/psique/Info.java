@@ -1,11 +1,13 @@
 package com.example.psique;
 
 public class Info {
+    //atributos
     int infoImageId;
     String infoTitle;
     String infoArticleName;
     String infoLink;
 
+    //constructor
     public Info(int infoImageId, String infoTitle, String infoArticleName, String src) {
         this.infoImageId = infoImageId;
         this.infoTitle = infoTitle;
@@ -13,6 +15,7 @@ public class Info {
         this.infoLink = src;
     }
 
+    //getters y setters
     public int getInfoImageId() {
         return infoImageId;
     }

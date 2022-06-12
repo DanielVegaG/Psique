@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,7 +31,7 @@ public class NewsActivity extends AppCompatActivity {
         //inicializar atributos
         rb_newsDate = findViewById(R.id.rb_newsDate);
         rb_newsDate.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//si se pulsa el botón de ordenar por fecha
             public void onClick(View view) {
                 init("date");
             }
@@ -40,7 +39,7 @@ public class NewsActivity extends AppCompatActivity {
 
         rb_newsScope = findViewById(R.id.rb_newsScope);
         rb_newsScope.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//si se pulsa el botón de ordenar por ámbito
             public void onClick(View view) {
                 init("");
             }
@@ -57,7 +56,7 @@ public class NewsActivity extends AppCompatActivity {
             }
         });
 
-        init("");
+        init("");//si no se ha seleccionado ninguno, que aparezca directamente ordenado por ámbito
     }
 
 

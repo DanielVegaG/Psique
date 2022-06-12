@@ -2,12 +2,14 @@ package com.example.psique;
 
 
 public class News {
+    //atributos
     int newsImageId;
     String newsTitle;
     String newsArticleName;
     String newsLink;
     String newsDate;
 
+    //constructor
     public News(int newsImageId, String newsTitle, String newsArticleName, String src, String newsDate) {
         this.newsImageId = newsImageId;
         this.newsTitle = newsTitle;
@@ -16,6 +18,7 @@ public class News {
         this.newsDate = newsDate;
     }
 
+    //getters y setters
     public int getNewsImageId() {
         return newsImageId;
     }

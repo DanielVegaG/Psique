@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,8 +76,8 @@ import io.reactivex.schedulers.Schedulers;
 public class ChatIndividualActivity extends AppCompatActivity implements ILoadTimeFromFirebaseListener, IFirebaseLoadFailed {
 
     //atributos
-    private static final int MY_CAMERA_REQUEST_CODE = 7171;
-    private static final int MY_RESULT_LOAD_IMAGE = 7172;
+    private static final int MY_CAMERA_REQUEST_CODE = 7171;//número para controlar cuándo se selecciona hacer una foto
+    private static final int MY_RESULT_LOAD_IMAGE = 7172;//número para controlar cuándo se selecciona la galería
 
     @BindView(R.id.tb_individualChat)
     public Toolbar tb_individualChat;//Toolbar del chat
@@ -285,6 +286,7 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
              */
             @Override
             protected void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i, @NonNull ChatMessageModel chatMessageModel) {
+                Log.d("Strings", "Contenido: "+chatMessageModel.getContent()+"");
                 if (viewHolder instanceof ChatTextHolder) {//si el holder es un mensaje de texto propio
                     ChatTextHolder chatTextHolder = (ChatTextHolder) viewHolder;
 
@@ -299,6 +301,7 @@ public class ChatIndividualActivity extends AppCompatActivity implements ILoadTi
                     ChatTextReceiveHolder chatTextReceiveHolder = (ChatTextReceiveHolder) viewHolder;
 
                     //se da valor a los atributos del holder de los mensajes de texto recibidos
+                    Log.d("Strings", "Contenido: "+chatMessageModel.getContent()+"");
                     chatTextReceiveHolder.tv_friendChatMessage.setText(chatMessageModel.getContent());
                     chatTextReceiveHolder.tv_friendChatTime.setText(
                             DateUtils.getRelativeTimeSpanString(chatMessageModel.getTimeStamp(),

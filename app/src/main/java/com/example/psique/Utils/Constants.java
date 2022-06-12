@@ -13,7 +13,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.OpenableColumns;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
@@ -49,7 +48,6 @@ public class Constants {
      * @return
      */
     public static String generateChatRoomId(String string1, String string2) {
-        Log.d("STRINGS", string1+" "+string2);
         if (string1.compareTo(string2) > 0)//si la primera cadena es léxicamente mayor crea el id poniendo a éste primero
             return new StringBuilder(string1).append(string2).toString();
         else if(string1.compareTo(string2) < 0)//si la primera cadena es léxicamente menor, lo hace poniendo primero a la segunda
@@ -104,6 +102,16 @@ public class Constants {
         return result;
     }
 
+    /**
+     * Muestra las notificaciones
+     * @param context
+     * @param id
+     * @param title
+     * @param content
+     * @param sender
+     * @param roomId
+     * @param intent
+     */
     public static void showNotification(Context context, int id,
                                         String title, String content,
                                         String sender, String roomId,
@@ -113,13 +121,13 @@ public class Constants {
             pendingIntent = PendingIntent.getActivity(context,
                     id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String NOTIFICATION_CHANNEL_ID="com.example.psique";
+        String NOTIFICATION_CHANNEL_ID="com.example.psique";//nombre del canal de la app
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
 
-        //comprobar varsión
+        //comprobar versión
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel notificationChannel =
                     new NotificationChannel(NOTIFICATION_CHANNEL_ID,
@@ -129,7 +137,7 @@ public class Constants {
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.MAGENTA);
             notificationChannel.enableVibration(true);
-            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});
+            notificationChannel.setVibrationPattern(new long[]{0,1000,500,1000});//datos de la notificación
 
             notificationManager.createNotificationChannel(notificationChannel);
         }
@@ -146,8 +154,8 @@ public class Constants {
         Notification notification = builder.build();
         
         if (!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(sender) &&
-                !Constants.roomSelected.equals(roomId))
-            notificationManager.notify(id,notification);
+                !Constants.roomSelected.equals(roomId))//si el usuario actual es distinto al que manda la aplicación y no se está en el chat
+            notificationManager.notify(id,notification);//manda la notificación
 
     }
 }

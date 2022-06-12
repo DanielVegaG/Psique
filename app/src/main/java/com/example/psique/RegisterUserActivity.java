@@ -61,11 +61,16 @@ public class RegisterUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
-        init();
+        init();//inicializa los atributos
 
-        setDefaultData();
+        setDefaultData();//controla los campos que se rellenan en el registro
+        // y les pasa el valor obtenido al UserModel
     }
 
+    /**
+     * controla los campos que se rellenan en el registro
+     * y les pasa el valor obtenido al UserModel
+     */
     private void setDefaultData() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         et_phone.setText(user.getPhoneNumber());
@@ -82,7 +87,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         b_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isSelectBirthdate || et_firstName.getText().toString().equals("")) {
+                if (!isSelectBirthdate || et_firstName.getText().toString().equals("")) {//si no hay ni nombre ni fecha de nacimiento
                     Toast.makeText(RegisterUserActivity.this, "Por favor, es obligatorio que rellene el nombre y la fecha de nacimiento", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -93,7 +98,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 userModel.setBirthDate(calendar.getTimeInMillis());
                 userModel.setProfessional(cb_professional.isChecked());
 
-                if (cb_professional.isChecked())
+                if (cb_professional.isChecked())//si es profesional, que le añada Dr/a. al nombre
                     userModel.setFirstName("Dr/a. "+et_firstName.getText().toString());
                 else
                     userModel.setFirstName(et_firstName.getText().toString());
@@ -122,6 +127,9 @@ public class RegisterUserActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Imnicializa los atributos
+     */
     private void init() {
         ButterKnife.bind(this);
         database = FirebaseDatabase.getInstance();

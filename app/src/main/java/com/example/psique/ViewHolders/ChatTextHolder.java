@@ -12,6 +12,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * Esta clase sirve para los mensajes de texto enviados por el usuario
+ */
 public class ChatTextHolder extends RecyclerView.ViewHolder {
 
     //atributos
@@ -23,6 +26,7 @@ public class ChatTextHolder extends RecyclerView.ViewHolder {
 
     private Unbinder unbinder;
 
+    //contructor
     public ChatTextHolder(@NonNull View itemView) {
         super(itemView);
         unbinder = ButterKnife.bind(this, itemView);

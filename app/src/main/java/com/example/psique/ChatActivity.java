@@ -32,8 +32,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        init();
-        setupViewPager();
+        init();//inicializa los atributos
+        setupViewPager();//establecre un viewPager
 
         //obtener token para notificaciones
         FirebaseMessaging.getInstance()
@@ -46,6 +46,9 @@ public class ChatActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * añade el viewPage a la activity
+     */
     private void setupViewPager() {
         viewPager2.setOffscreenPageLimit(2);
         viewPager2.setAdapter(new ChatPagerAdapter(getSupportFragmentManager(), new Lifecycle() {
@@ -94,7 +97,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         }));
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
+            @Override//crea dos pestañas al entrar en "Chat", una pone "Tus chats" y otra "Uuarios"
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if(position == 0){
                     tab.setText("Tus chats");
@@ -105,6 +108,9 @@ public class ChatActivity extends AppCompatActivity {
         }).attach();
     }
 
+    /**
+     * Une los atributos a sus valores
+     */
     private void init(){
         ButterKnife.bind(this);
     }

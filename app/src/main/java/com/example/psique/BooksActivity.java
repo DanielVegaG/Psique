@@ -36,7 +36,7 @@ public class BooksActivity extends AppCompatActivity {
             }
         });
 
-        init();
+        init();//inicializa los componentes
     }
 
 
@@ -87,7 +87,7 @@ public class BooksActivity extends AppCompatActivity {
      * Da el adaptador al recyclerView
      */
     public void init() {
-        populateList();
+        populateList();//llena la lista de datos
 
         BooksListAdapter listAdapter = new BooksListAdapter(booksList, this);
         RecyclerView recyclerView = findViewById(R.id.rv_books);

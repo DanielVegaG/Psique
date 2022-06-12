@@ -26,7 +26,7 @@ public class HelpListAdapter extends RecyclerView.Adapter<HelpListAdapter.HelpVi
 
 
     /**
-     * Constructor para dar valores iniciales a
+     * Constructor para dar valores iniciales
      *
      * @param itemList, lista de Help
      * @param context
@@ -88,9 +88,7 @@ public class HelpListAdapter extends RecyclerView.Adapter<HelpListAdapter.HelpVi
         links = items;
     }
 
-    /**
-     *
-     */
+
     public static class HelpViewHolder extends RecyclerView.ViewHolder {
         ImageView helpImage;
         TextView helpTitle;

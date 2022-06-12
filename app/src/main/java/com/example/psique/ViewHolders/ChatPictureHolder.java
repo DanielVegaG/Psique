@@ -13,6 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * Holder para mandar imágenes
+ */
 public class ChatPictureHolder extends RecyclerView.ViewHolder {
 
     //atributos
@@ -25,6 +28,7 @@ public class ChatPictureHolder extends RecyclerView.ViewHolder {
 
     private Unbinder unbinder;
 
+    //constructor que une atributos a su valor
     public ChatPictureHolder(@NonNull View itemView) {
         super(itemView);
         unbinder = ButterKnife.bind(this, itemView);

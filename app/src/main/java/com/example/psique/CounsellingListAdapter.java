@@ -26,7 +26,7 @@ public class CounsellingListAdapter extends RecyclerView.Adapter<CounsellingList
 
 
     /**
-     * Constructor para dar valores iniciales a
+     * Constructor para dar valores iniciales
      *
      * @param itemList, lista de Counselling
      * @param context

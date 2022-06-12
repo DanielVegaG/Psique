@@ -26,7 +26,7 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.Book
 
 
     /**
-     * Constructor para dar valores iniciales a
+     * Constructor para dar valores iniciales
      *
      * @param itemList, lista de Books
      * @param context

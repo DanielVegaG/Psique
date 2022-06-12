@@ -13,6 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * Holder para los usuarios individuales
+ */
 public class UserViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.iv_peopleAvatar)
     public ImageView iv_peopleAvatar;
@@ -23,6 +26,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
 
     private Unbinder unbinder;
 
+    //constructor
     public UserViewHolder(@NonNull View itemView) {
         super(itemView);
         unbinder = ButterKnife.bind(this,itemView);

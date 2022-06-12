@@ -26,7 +26,7 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
 
 
     /**
-     * Constructor para dar valores iniciales a
+     * Constructor para dar valores iniciales
      *
      * @param itemList, lista de Info
      * @param context
@@ -88,9 +88,7 @@ public class InfoListAdapter extends RecyclerView.Adapter<InfoListAdapter.InfoVi
         links = items;
     }
 
-    /**
-     *
-     */
+
     public static class InfoViewHolder extends RecyclerView.ViewHolder {
         ImageView infoImage;
         TextView infoTitle;

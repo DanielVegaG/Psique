@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
         //inicializar atributos
         b_help = getView().findViewById(R.id.b_help);
         b_help.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//botón para ir a Ayudas
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), HelpActivity.class));
                 getActivity().finish();
@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
 
         b_info = getView().findViewById(R.id.b_info);
         b_info.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//botón para ir a Información
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), InfoActivity.class));
                 getActivity().finish();
@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
 
         b_articles = getView().findViewById(R.id.b_articles);
         b_articles.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//botón para ir a Artículos
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), ArticlesActivity.class));
                 getActivity().finish();
@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
 
         b_news = getView().findViewById(R.id.b_news);
         b_news.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//botón para ir a Noticias
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), NewsActivity.class));
                 getActivity().finish();
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
 
         b_counselling = getView().findViewById(R.id.b_counselling);
         b_counselling.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//botón para ir a Orientación
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), CounsellingActivity.class));
                 getActivity().finish();
@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
 
         b_books = getView().findViewById(R.id.b_books);
         b_books.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Override//botón para ir a Libros
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), BooksActivity.class));
                 getActivity().finish();

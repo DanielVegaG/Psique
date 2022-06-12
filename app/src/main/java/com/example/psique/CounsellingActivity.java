@@ -80,7 +80,7 @@ public class CounsellingActivity extends AppCompatActivity {
      * Da el adaptador al recyclerView
      */
     public void init() {
-        populateList();
+        populateList();//llena la lista
 
         CounsellingListAdapter listAdapter = new CounsellingListAdapter(counsellingList, this);
         RecyclerView recyclerView = findViewById(R.id.rv_counselling);

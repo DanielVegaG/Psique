@@ -4,9 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        firebaseAuth.addAuthStateListener(listener);
+        firebaseAuth.addAuthStateListener(listener);//está atento por si hay una cuenta al abrir la app
     }
 
     @Override
@@ -72,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Error in start: ", ex.getMessage());
         }
 
-        //Inicializar atributos
 
-
-        init();
+        init();//Inicializar atributos
     }
 
-
+    /**
+     * Da valor a los atributos
+     */
     private void init() {
         providers = Arrays.asList(
                 new AuthUI.IdpConfig.PhoneBuilder().build()
@@ -100,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
                     )).withListener(new MultiplePermissionsListener() {
                         @Override
                         public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                            if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                            if (multiplePermissionsReport.areAllPermissionsGranted()) {//si se habilitaron todos los permisos
                                 FirebaseUser user = myFirebaseAuth.getCurrentUser();
-                                if (user != null) {
+                                if (user != null) {//si hay usuario, abre el menú principal
                                     checkUserFromFirebase();
-                                } else {
+                                } else {//si no hay usuario  lleva a la pantalla de registro
                                     showLoginLayout();
                                 }
                             } else {
@@ -121,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    /**
+     * Muestra la pantalla de login
+     */
     private void showLoginLayout() {
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
                 .setIsSmartLockEnabled(false)
@@ -128,6 +129,10 @@ public class MainActivity extends AppCompatActivity {
                 .setAvailableProviders(providers).build(), LOGIN_REQUEST_CODE);
     }
 
+    /**
+     * Si hay un usuario intorducido, llama al método de ir a la pantalla principal
+     * Si no, llama al de ir al registro
+     */
     private void checkUserFromFirebase() {
         userRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -149,12 +154,19 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * va a la pantalla principal
+     * @param userModel
+     */
     private void goToHomeActivity(UserModel userModel) {
         Constants.currentUser = userModel;//manda el modelo a la activity principal para tener el usuario
         startActivity(new Intent(MainActivity.this, MenuActivity.class));
         finish();
     }
 
+    /**
+     * Va al registro (cuando no existe el usuario)
+     */
     private void showRegisterLayout() {
         startActivity(new Intent(MainActivity.this, RegisterUserActivity.class));
         finish();
